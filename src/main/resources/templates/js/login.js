@@ -3,8 +3,8 @@ const API = "http://localhost:8080"
 
 function login() {
 
-    let usn = document.getElementById("username").value;
-    let pw = document.getElementById("password").value;
+    let usn = document.getElementById("usern").value;
+    let pw = document.getElementById("passw").value;
     let user = {
         username: usn,
         password: pw,
