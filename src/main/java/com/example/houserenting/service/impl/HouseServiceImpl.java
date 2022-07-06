@@ -26,6 +26,11 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
+    public Iterable<House> findAll() {
+        return null;
+    }
+
+    @Override
     public void save(House house) {
         houseRepository.save(house);
     }
@@ -34,4 +39,5 @@ public class HouseServiceImpl implements HouseService {
     public void remove(Long id) {
         houseRepository.deleteById(id);
     }
+
 }
