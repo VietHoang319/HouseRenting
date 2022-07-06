@@ -3,6 +3,7 @@ package com.example.houserenting.model;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -19,8 +20,6 @@ public class User implements Serializable {
     private String username;
 
     @Column(nullable = false)
-    @Min(value = 6, message = "Mật khẩu ít nhất phải có 6 ký tự")
-    @Max(value = 8, message = "Mật khẩu chỉ có tối đa 8 ký tự")
     private String password;
 
     @Column(nullable = false)
