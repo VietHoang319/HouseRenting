@@ -18,12 +18,17 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Page<Category> findAll(Pageable pageable) {
-        return categoryRepository.findAll(pageable);
+        return null;
     }
 
     @Override
     public Optional<Category> findById(Long id) {
         return categoryRepository.findById(id);
+    }
+
+    @Override
+    public Iterable<Category> findAll() {
+        return categoryRepository.findAll();
     }
 
     @Override
