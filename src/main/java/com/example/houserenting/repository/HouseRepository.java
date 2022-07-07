@@ -11,4 +11,5 @@ import org.springframework.stereotype.Repository;
 public interface HouseRepository extends JpaRepository<House,Long> {
     @Query(value = "select * from house where status = 1",nativeQuery = true)
     Page<House> findAll(Pageable pageable);
+    Iterable<House> findAllByCategory_Id(Long id);
 }

@@ -40,4 +40,8 @@ public class HouseServiceImpl implements HouseService {
         houseRepository.deleteById(id);
     }
 
+    @Override
+    public Iterable<House> findAllByCategory_Id(Long id) {
+        return houseRepository.findAllByCategory_Id(id);
+    }
 }

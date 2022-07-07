@@ -22,9 +22,18 @@ public class CategoryController {
     @Autowired
     CategoryService categoryService;
 
+//    @GetMapping
+//    public ResponseEntity<Iterable<Category>> findAllHouse() {
+//        List<Category> categories = (List<Category>) categoryService.findAll();
+//        return new ResponseEntity<>(categories, HttpStatus.OK);
+//    }
+
     @GetMapping
     public ResponseEntity<Iterable<Category>> findAllHouse() {
         List<Category> categories = (List<Category>) categoryService.findAll();
+        if (categories.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }
 
