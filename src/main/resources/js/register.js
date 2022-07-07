@@ -7,14 +7,10 @@ function showRegister() {
             </nav>
         </div>
     </div>
-
-
     <div id="login-div">
         <h3 >Đăng ký</h3>
-
         <label for="username">Tên đăng nhập</label>
         <input type="text" placeholder="Nhập tên đăng nhập" id="username">
-
         <label for="password">Mật khẩu</label>
         <input type="password" placeholder="Nhập mật khẩu" id="password">
         <label for="rePassword">Nhập lại mật khẩu</label>
@@ -24,7 +20,6 @@ function showRegister() {
         <button class="btn-login" onclick="register()" data-toggle="modal" data-target="#registerModal">Đăng ký</button>
         <button class="btn-login" onclick="showLogin()">Đăng nhập</button>
     </div>
-
     <!-- Modal -->
     <div class="modal fade" id="registerModal" data-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
