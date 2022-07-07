@@ -72,11 +72,7 @@ public class HouseController {
 //        return new ResponseEntity<>(productOptional, HttpStatus.OK);
 //    }
 
-    @GetMapping("/category/{id}")
-    public ResponseEntity<Page<House>> findCategoryId(@PathVariable Long id, @PageableDefault(value = 2) Pageable pageable) {
-        Page <House> houses = houseService.findAllByCategory_Id(id, pageable);
-        return new ResponseEntity<>(houses, HttpStatus.OK);
-    }
+
 
 //    @GetMapping
 //    public ResponseEntity<Page<House>> findAllHouse(@PageableDefault(value = 2) Pageable pageable) {
