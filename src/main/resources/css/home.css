@@ -26,28 +26,10 @@
     background: #ffe5eb;
 }
 
-.info0 {
-    margin-bottom: 2%;
-    border: 1px solid;
-}
-
-.info1 {
-    margin: 1.5% 1.5% 1.5% 1.5%;
-}
-
-.content {
-    float: left;
-}
-
-.image-content img{
-    width: 230px;
-    height: 150px;
-}
-
-.text-content {
-    margin-left: 15px;
-}
-
-.info0:hover {
+.card :hover{
     background: #ffe5eb;
+}
+
+.image-card {
+    width: 100%;
 }
