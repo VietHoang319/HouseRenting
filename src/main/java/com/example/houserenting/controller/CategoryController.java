@@ -1,9 +1,5 @@
 package com.example.houserenting.controller;
 
-
-
-
-
 import com.example.houserenting.model.Category;
 import com.example.houserenting.model.House;
 import com.example.houserenting.service.CategoryService;
@@ -30,11 +26,7 @@ public class CategoryController {
     @Autowired
     HouseServiceImpl houseService;
 
-//    @GetMapping
-//    public ResponseEntity<Iterable<Category>> findAllHouse() {
-//        List<Category> categories = (List<Category>) categoryService.findAll();
-//        return new ResponseEntity<>(categories, HttpStatus.OK);
-//    }
+
 
     @GetMapping
     public ResponseEntity<Iterable<Category>> findAllCate() {
@@ -47,20 +39,6 @@ public class CategoryController {
         return new ResponseEntity<>(houses, HttpStatus.OK);
     }
 
-//    @GetMapping
-//    public ResponseEntity<Page<House>> findAllHouse(@PageableDefault(value = 2) Pageable pageable) {
-//        Page<House> houses = houseService.findAll(pageable);
-//        return new ResponseEntity<>(houses, HttpStatus.OK);
-//    }
-
-//    @GetMapping("/{id}")
-//    public ResponseEntity<Category> findHouseId(@PathVariable Long id) {
-//        Optional<Category> categoryOptional = categoryService.findById(id);
-//        if (!categoryOptional.isPresent()) {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//        return new ResponseEntity<>(categoryOptional.get(), HttpStatus.OK);
-//    }
 
 }
 
