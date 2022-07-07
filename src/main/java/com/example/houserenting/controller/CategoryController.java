@@ -33,12 +33,8 @@ public class CategoryController {
 //    }
 
     @GetMapping
-    public ResponseEntity<Page<Category>> findAllCate(@PageableDefault(value = 2) Pageable pageable) {
-        Page<Category> categories = categoryService.findAll(pageable);
-        if (categories.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(categories, HttpStatus.OK);
+    public ResponseEntity<Iterable<Category>> findAllCate() {
+    return new ResponseEntity<>(categoryService.findAllCategory(),HttpStatus.OK);
     }
 
 //    @GetMapping

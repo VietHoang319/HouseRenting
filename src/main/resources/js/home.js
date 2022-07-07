@@ -35,20 +35,17 @@ function showHome() {
                     <div class="accordion dropdownTitle"><p class="link dropdownTitle">Chọn lọc theo:</p></div>
                     <ul id="accordion" class="accordion">
                         <li>
-                            <div class="link">Loại phòng<i class="fa fa-chevron-down"></i>
+                            <div class="link" onclick="findAllCategory()">Loại phòng<i class="fa fa-chevron-down"></i>
                             </div>
-                            <ul class="submenu">
-                                <li><a href="#">Photoshop</a></li>
-                                <li><a href="#">HTML</a></li>
-                                <li><a href="#">CSS</a></li>
+                            <ul class="submenu" id="listCategory">
                             </ul>
                         </li>
                         <li>
                             <div class="link">Số phòng ngủ<i class="fa fa-chevron-down"></i></div>
                             <ul class="submenu">
-                                <li><a href="#">Javascript</a></li>
-                                <li><a href="#">jQuery</a></li>
-                                <li><a href="#">Ruby</a></li>
+                                <li><a href="#">1 Phòng Ngủ</a></li>
+                                <li><a href="#">2 Phòng Ngủ</a></li>
+                                <li><a href="#">3 Phòng Ngủ</a></li>
                             </ul>
                         </li>
                         <li>
@@ -65,7 +62,7 @@ function showHome() {
             </div>
 
             <div class="col-10">
-                    <div class="row">
+                    <div class="row">   
 <!--                    Thông tin-->
                         <div class="col-4 mt-4 content">
                             <div class="card" style="width: 18rem;">
