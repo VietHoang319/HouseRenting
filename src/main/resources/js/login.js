@@ -41,8 +41,9 @@ function login() {
         url: API + "/login",
         data: JSON.stringify(user),
         success: function (data) {
-            console.log(data)
-            localStorage.setItem('token',data.accessToken);
+            token = data.accessToken
+            localStorage.setItem(tokenKey, JSON.stringify(token))
+            localStorage.setItem("id", JSON.stringify(data.id))
         },
         error: function (error) {
             console.log(error)

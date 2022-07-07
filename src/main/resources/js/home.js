@@ -1,4 +1,9 @@
 let content = $("#content")
+let tokenKey = "token"
+let token = "";
+localStorage.setItem(tokenKey, token)
+let userId = "";
+localStorage.setItem("id", JSON.stringify(userId))
 const API = "http://localhost:8080"
 
 function showHome() {
@@ -88,7 +93,7 @@ function showHome() {
 function findAll() {
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/houses",
+        url: "http://localhost:8080/home",
         success: function (data) {
             console.log(data);
             dislpay(data.content);
