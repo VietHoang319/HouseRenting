@@ -1,4 +1,5 @@
 let content = $("#content")
+const API = "http://localhost:8080"
 
 function showHome() {
     let str = `

@@ -17,9 +17,39 @@ function showLogin() {
 
         <label for="password">Mật khẩu</label>
         <input type="password" placeholder="Nhập mật khẩu" id="password">
-        <button class="btn-login">Đăng nhập</button>
+        <button class="btn-login" onclick="login()">Đăng nhập</button>
         <button class="btn-login" onclick="showRegister()">Đăng ký</button>
         <button class="btn-login"><i class="fa-brands fa-google"></i> Đăng nhập với Google</button>
     </div>`
     content.html(str)
+}
+
+function login() {
+
+    let usn = document.getElementById("username").value;
+    let pw = document.getElementById("password").value;
+    let user = {
+        username: usn,
+        password: pw,
+    }
+    $.ajax({
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        type: 'POST',
+        url: API + "/login",
+        data: JSON.stringify(user),
+        success: function (data) {
+            console.log(data)
+            localStorage.setItem('token',data.accessToken);
+        },
+        error: function (error) {
+            console.log(error)
+        }
+    })
+}
+
+function logout(){
+    localStorage.removeItem('token');
 }
