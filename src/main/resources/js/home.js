@@ -53,9 +53,9 @@ function showHome() {
                             <div class="link"></i>Số phòng tắm<i class="fa fa-chevron-down"></i>
                             </div>
                             <ul class="submenu">
-                                <li><a href="#">Tablet</a></li>
-                                <li><a href="#">Mobile</a></li>
-                                <li><a href="#">Desktop</a></li>
+                                <li><a href="#">1 Phòng Tắm</a></li>
+                                <li><a href="#">2 Phòng Tắm</a></li>
+                                <li><a href="#">3 Phòng Tắm</a></li>
                             </ul>
                         </li>
                     </ul>
