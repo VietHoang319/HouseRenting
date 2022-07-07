@@ -1,0 +1,53 @@
+#navbar {
+    padding: 0 14%;
+    background: #b63b4d;
+}
+
+.navdiv {
+    padding: 0 0 0 0;
+}
+
+#logo {
+    font-family: 'The Nautigal', cursive;
+    font-size: 200%;
+    color: white;
+}
+
+.btn-nav {
+    width: 100px;
+    height: 35px;
+    background: white;
+    margin: 0 0.5%;
+    color: #b63b4d;
+    border: none;
+}
+
+.btn-nav:hover {
+    background: #ffe5eb;
+}
+
+.info0 {
+    margin-bottom: 2%;
+    border: 1px solid;
+}
+
+.info1 {
+    margin: 1.5% 1.5% 1.5% 1.5%;
+}
+
+.content {
+    float: left;
+}
+
+.image-content img{
+    width: 230px;
+    height: 150px;
+}
+
+.text-content {
+    margin-left: 15px;
+}
+
+.info0:hover {
+    background: #ffe5eb;
+}
