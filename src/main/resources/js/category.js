@@ -12,5 +12,4 @@ function findAllCategory() {
             console.log(data)
         }
     })
-
 }
