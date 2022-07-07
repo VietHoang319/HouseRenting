@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -64,6 +65,26 @@ public class HouseController {
         houseService.save(houseOptional.get());
         return new ResponseEntity<>(houseOptional.get(), HttpStatus.NO_CONTENT);
     }
+
+//    @GetMapping("/category/{id}")
+//    public ResponseEntity<Iterable<House>> findCategoryId(@PathVariable Long id) {
+//        Iterable <House> productOptional = houseService.findAllByCategory_Id(id);
+//        return new ResponseEntity<>(productOptional, HttpStatus.OK);
+//    }
+
+    @GetMapping("/category/{id}")
+    public ResponseEntity<Page<House>> findCategoryId(@PathVariable Long id, @PageableDefault(value = 2) Pageable pageable) {
+        Page <House> houses = houseService.findAllByCategory_Id(id, pageable);
+        return new ResponseEntity<>(houses, HttpStatus.OK);
+    }
+
+//    @GetMapping
+//    public ResponseEntity<Page<House>> findAllHouse(@PageableDefault(value = 2) Pageable pageable) {
+//        Page<House> houses = houseService.findAll(pageable);
+//        return new ResponseEntity<>(houses, HttpStatus.OK);
+//    }
+
+
 
 
 }

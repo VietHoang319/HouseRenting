@@ -40,4 +40,15 @@ public class HouseServiceImpl implements HouseService {
         houseRepository.deleteById(id);
     }
 
+    @Override
+    public Page<House> findAllByCategory_Id(Long id, Pageable pageable) {
+        return houseRepository.findAllByCategory_Id(id, pageable);
+    }
+
+
+//    Cái này tìm không phân trang
+//    @Override
+//    public Iterable<House> findAllByCategory_Id(Long id) {
+//        return houseRepository.findAllByCategory_Id(id);
+//    }
 }
