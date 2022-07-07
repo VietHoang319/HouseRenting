@@ -24,7 +24,7 @@ function showLogin() {
     content.html(str)
 }
 
-function login() {
+function login(){
 
     let usn = document.getElementById("username").value;
     let pw = document.getElementById("password").value;
@@ -44,6 +44,8 @@ function login() {
             token = data.accessToken
             localStorage.setItem(tokenKey, JSON.stringify(token))
             localStorage.setItem("id", JSON.stringify(data.id))
+            localStorage.setItem("name", data.username)
+            showHome()
         },
         error: function (error) {
             console.log(error)

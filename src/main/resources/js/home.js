@@ -4,6 +4,8 @@ let token = "";
 localStorage.setItem(tokenKey, token)
 let userId = "";
 localStorage.setItem("id", JSON.stringify(userId))
+let userName = "";
+localStorage.setItem("name", userName)
 const API = "http://localhost:8080"
 
 function showHome() {
@@ -22,70 +24,86 @@ function showHome() {
                         <li class="nav-item">
                             <a class="nav-link" href="#">Link</a>
                         </li>
-                    </ul>
-                    <!--                    <button class="btn btn-outline-success" type="submit">Search</button>-->
-                    <button class="btn-nav" onclick="showLogin()">Đăng nhập</button>
-                    <button class="btn-nav" onclick="showRegister()">Đăng ký</button>
-                </div>
-            </nav>
-        </div>
-    </div>
-    <br>
-    <br>
-    <br>
-    <div class="container">
-        <div class="row">
-            <!--        dropdown-->
-            <div class="col-2">
-                <div class="dropdown">
-                    <div class="accordion dropdownTitle"><p class="link dropdownTitle">Chọn lọc theo:</p></div>
-                    <ul id="accordion" class="accordion">
-                        <li>
-                            <div class="link" onclick="findAllCategory()">Loại phòng<i class="fa fa-chevron-down"></i>
-                            </div>
-                            <ul class="submenu" id="listCategory">
-                            </ul>
-                        </li>
-                        <li>
-                            <div class="link">Số phòng ngủ<i class="fa fa-chevron-down"></i></div>
-                            <ul class="submenu">
-                                <li><a href="#">1 Phòng Ngủ</a></li>
-                                <li><a href="#">2 Phòng Ngủ</a></li>
-                                <li><a href="#">3 Phòng Ngủ</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <div class="link"></i>Số phòng tắm<i class="fa fa-chevron-down"></i>
-                            </div>
-                            <ul class="submenu">
-                                <li><a href="#">Tablet</a></li>
-                                <li><a href="#">Mobile</a></li>
-                                <li><a href="#">Desktop</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+                    </ul>`
+    // <!--                    <button class="btn btn-outline-success" type="submit">Search</button>-->
+    if (token === "") {
+        str += `<button class="btn-nav" onclick="showLogin()">Đăng nhập</button>
+                <button class="btn-nav" onclick="showRegister()">Đăng ký</button>`
+    } else {
+        str += `<div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    ${localStorage.getItem("name")}
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </div>`
+    }
 
-            <div class="col-10">
-                    <div class="row" id="list">
-<!--                    Thông tin-->
-                        <div class="col-4 mt-4 content">
-                            <div class="card" style="width: 18rem;">
-                              <img class="image-card" src="https://nhadepsang.com.vn/images/2017/08/20-hinh-anh-noi-bat-cho-mau-nha-dep-1-tang-o-nong-thon-3.jpg" class="card-img-top" alt="...">
-                              <div class="card-body">
-                                <h3 class="card-title">Tên</h3>
-                                <p><i class="fa-solid fa-location-dot"></i>  Địa chỉ</p>
-                                <p class="card-text"><span><i class="fa-solid fa-bed"></i> phòng ngủ</span>
-                                <span><i class="fa-solid fa-bath"></i> phòng tắm</span></p>
-                                <p><h4>Giá tiền</h4></p>
-                              </div>
+    str += `    </div>
+                        </nav>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <br>
+                <div class="container">
+                    <div class="row">
+                        <!--        dropdown-->
+                        <div class="col-2">
+                            <div id="dropdown1">
+                                <div class="accordion dropdownTitle"><p class="link dropdownTitle">Chọn lọc theo:</p></div>
+                                <ul id="accordion" class="accordion">
+                                    <li>
+                                        <div class="link" onclick="findAllCategory()">Loại phòng<i class="fa fa-chevron-down"></i>
+                                        </div>
+                                        <ul class="submenu" id="listCategory">
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="link">Số phòng ngủ<i class="fa fa-chevron-down"></i></div>
+                                        <ul class="submenu">`
+    for (let i = 1; i <= 5; i++) {
+        str += `<li><a href="#" onclick="">${i} Phòng Ngủ</a></li>`
+    }
+    str += `</ul>
+                    <li>
+                        <div class="link"></i>
+                        Số phòng tắm<i class="fa fa-chevron-down"></i>
+                    </div>
+                    <ul class="submenu">`
+    for (let i = 1; i <= 3; i++) {
+        str += `<li><a href="#" onclick="">${i} Nhà tắm</a></li>`
+    }
+    `</ul>
+                </li>
+                </ul>
+                </div>
+                </div>
+                
+                    <div class="col-10">
+                        <div class="row" id="list">
+                            <!--                    Thông tin-->
+                            <div class="col-4 mt-4 content">
+                                <div class="card" style="width: 18rem;">
+                                    <img class="image-card"
+                                         src="https://nhadepsang.com.vn/images/2017/08/20-hinh-anh-noi-bat-cho-mau-nha-dep-1-tang-o-nong-thon-3.jpg"
+                                         class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h3 class="card-title">Tên</h3>
+                                            <p><i class="fa-solid fa-location-dot"></i> Địa chỉ</p>
+                                            <p class="card-text"><span><i class="fa-solid fa-bed"></i> phòng ngủ</span>
+                                                <span><i class="fa-solid fa-bath"></i> phòng tắm</span></p>
+                                            <p><h4>Giá tiền</h4></p>
+                                        </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-            </div>
-        </div>
-    </div>`
+                </div>
+                </div>`
     content.html(str)
     findAll();
 }
@@ -96,17 +114,16 @@ function findAll() {
         url: "http://localhost:8080/home",
         success: function (data) {
             console.log(data);
-            dislpay(data.content);
+            display(data.content);
         }
     });
 }
 
-function dislpay(data) {
+function display(data) {
     let tbody = document.getElementById("list")
     let str = "";
-    for (let i=0; i<data.length; i++) {
-        str += `
-                            <div class="col-4 mt-4 content">
+    for (let i = 0; i < data.length; i++) {
+        str += `<div class="col-4 mt-4 content">
                             <div class="card" style="width: 18rem;">
                               <img class="image-card" src="https://nhadepsang.com.vn/images/2017/08/20-hinh-anh-noi-bat-cho-mau-nha-dep-1-tang-o-nong-thon-3.jpg" class="card-img-top" alt="...">
                               <div class="card-body">
@@ -117,14 +134,7 @@ function dislpay(data) {
                                 <p><h4>Giá: ${data[i].price} (bạt/đêm)</h4></p>
                               </div>
                             </div>
-                        </div>
-`
+                        </div>`
     }
     tbody.innerHTML = str;
 }
-
-
-
-
-
-showHome()
