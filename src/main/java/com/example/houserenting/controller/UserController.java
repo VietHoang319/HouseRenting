@@ -20,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -60,7 +61,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> createUser(@RequestBody User user, BindingResult bindingResult) {
+    public ResponseEntity<User> createUser(@Valid @RequestBody User user, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
