@@ -18,6 +18,7 @@ function login() {
         url: API + "/login",
         data: JSON.stringify(user),
         success: function (data) {
+            alert("duoc roi di thoi")
             console.log(data)
             localStorage.setItem('token',data.accessToken);
         },
