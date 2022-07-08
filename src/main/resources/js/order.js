@@ -7,7 +7,7 @@ function showOrderHouseDetail(id) {
                     </div>
                     <div class="row mt-4 mb-4">
                         <div class="col-12">
-                            <button class="btn-nav btn-crud" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="width: 100%">Thuê nhà</button>
+                            <button class="btn-nav btn-order" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="width: 100%">Thuê nhà</button>
                         </div>
                     </div>
                 </div>

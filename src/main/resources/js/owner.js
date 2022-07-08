@@ -17,7 +17,7 @@ function searchByCategoryId(id) {
         type: "GET",
         url: "http://localhost:8080/categories/"+id,
         success: function (data) {
-            display(data.content);
+            display(data.content, true);
         }
     });
 }

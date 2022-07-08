@@ -1,14 +1,13 @@
 function showHouseDetail(id) {
+    let content0 = $("#content0")
     let str = `<div class="row">
             <div class="col-12">
                 <div id="content1">
                     <div class="row">
-                        <button class="btn-nav"><i class="fa-solid fa-angles-left"></i><span> Quay lại</span></button>
+                        <button class="btn-nav" onclick="showMyHouse()"><i class="fa-solid fa-angles-left"></i><span> Quay lại</span></button>
                     </div>
-
-<!--                                        carousel-->
                     <div class="row mt-4">
-                        <div class="col-11 info-frame" style="margin: 0 5% 3% 5%">
+                        <div class="col-12 info-frame">
                             <div id="infoFrame">
                         
                             </div>
@@ -62,5 +61,6 @@ function showHouseDetail(id) {
                 </div>
             </div>
         </div>`
-    content.html(str)
+    content0.html(str)
+    getHouse(id)
 }

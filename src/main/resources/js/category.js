@@ -22,7 +22,7 @@ function searchByCategoryId(id) {
 
                     </div>`
             content1.html(str)
-            display(data.content);
+            display(data.content, true);
         }
     });
 }

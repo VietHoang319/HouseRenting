@@ -98,27 +98,32 @@ function findAll() {
         url: "http://localhost:8080/home",
         success: function (data) {
             console.log(data);
-            display(data.content);
+            display(data.content, true);
         }
     });
 }
 
-function display(data) {
+function display(data, flag) {
     let tbody = document.getElementById("list")
     let str = "";
     for (let i = 0; i < data.length; i++) {
-        str += `<div class="col-4 mt-4 content">
-                            <div class="card" style="width: 18rem;" onclick="showOrderHouseDetail(${data[i].id})">
-                              <img class="image-card" src="https://nhadepsang.com.vn/images/2017/08/20-hinh-anh-noi-bat-cho-mau-nha-dep-1-tang-o-nong-thon-3.jpg" class="card-img-top" alt="...">
-                              <div class="card-body">
-                                <h3 class="card-title">${data[i].name}</h3>
-                                <p><i class="fa-solid fa-location-dot"></i> ${data[i].address}</p>
-                                <p class="card-text"><span><i class="fa-solid fa-bed"></i> ${data[i].bedroom} phòng ngủ</span>
-                                <span><i class="fa-solid fa-bath"></i> ${data[i].bathroom} phòng tắm</span></p>
-                                <p><h4>Giá: ${data[i].price} (bạt/đêm)</h4></p>
-                              </div>
-                            </div>
-                        </div>`
+        str += `<div class="col-4 mt-4 content">`
+            if (flag == true) {
+                str += `<div class="card" style="width: 18rem;" onclick="showOrderHouseDetail(${data[i].id})">`
+            }
+            else {
+                str += `<div class="card" style="width: 18rem;" onclick="showHouseDetail(${data[i].id})">`
+            }
+            str += `<img class="image-card" src="https://nhadepsang.com.vn/images/2017/08/20-hinh-anh-noi-bat-cho-mau-nha-dep-1-tang-o-nong-thon-3.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h3 class="card-title">${data[i].name}</h3>
+                        <p><i class="fa-solid fa-location-dot"></i> ${data[i].address}</p>
+                        <p class="card-text"><span><i class="fa-solid fa-bed"></i> ${data[i].bedroom} phòng ngủ</span>
+                        <span><i class="fa-solid fa-bath"></i> ${data[i].bathroom} phòng tắm</span></p>
+                        <p><h4>Giá: ${data[i].price} (bạt/đêm)</h4></p>
+                      </div>
+                    </div>
+                </div>`
     }
     tbody.innerHTML = str;
 }

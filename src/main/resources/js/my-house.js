@@ -2,13 +2,18 @@ let addForm = document.getElementById('addForm');
 let categorySelect = document.getElementById('categoryId');
 let role;
 
-
 function showMyHouse() {
     let content0 = $("#content0")
-    let str = `<div class="row"><button class="mt-4 btn-nav" style="border: 2px solid black">Thêm nhà</button></div>
-                    <div class="row" id="list">
-
-                    </div>`
+let str = `     <div class="row">
+                    <button class="mt-4 btn-nav" style="border: 2px solid black">Thêm nhà</button>
+                </div>
+                <div class="col-12">
+                    <div id="content1">
+                        <div class="row" id="list">
+                        
+                        </div>
+                    </div>
+                </div>`
     content0.html(str)
     findAllMyHouse()
 }
@@ -39,15 +44,6 @@ function save() {
     let description = $("#descriptionA");
     let category = $("#categoryId");
 
-
-    // let name = document.getElementById("nameA").value;
-    // let address = document.getElementById("addressA").value;
-    // let bedroom = document.getElementById("bedroomA").value;
-    // let bathroom = document.getElementById("bathroomA").value;
-    // let price = document.getElementById("priceA").value;
-    // let description = document.getElementById("descriptionA").value;
-    // let category = document.getElementById("categoryId").value;
-
     let house = {
         name: name.val(),
         address : address.val(),
@@ -62,9 +58,6 @@ function save() {
         owner: {
             id: localStorage.getItem("id")
         }
-
-
-
         // name: name,
         // address: address,
         // bedroom : bedroom,
@@ -119,7 +112,7 @@ function findAllMyHouse() {
         url: "http://localhost:8080/houses/find-by-ownerId?owner_id="+ localStorage.getItem("id"),
         success: function (data) {
             console.log(data);
-            display(data);
+            display(data, false);
         }
     });
 }

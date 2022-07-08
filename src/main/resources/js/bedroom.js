@@ -12,7 +12,7 @@ function searchByBedroom(bedroom) {
         url: "http://localhost:8080/home/find-by-bedroom?bedroom=" + bedroom,
         success: function (data) {
             console.log(data.content)
-            display(data.content)
+            display(data.content, true)
         }
     })
 }
