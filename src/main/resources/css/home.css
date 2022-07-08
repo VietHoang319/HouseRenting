@@ -33,3 +33,9 @@
 .image-card {
     width: 100%;
 }
+
+.btn-search {
+    margin: 0 3%;
+    width: 35px;
+    border-radius: 50%;
+}

@@ -15,4 +15,5 @@ public interface HouseService extends IService<House>{
     Page<House>findAllByBathroomAndBedroom(int bathroom,int bedroom,Pageable pageable);
 
 //    Page<House>findAllByStatus(int status,Pageable pageable);
+    Iterable<House> findByOwnerId (int owner_id);
 }

@@ -13,8 +13,6 @@ public interface HouseRepository extends JpaRepository<House,Long> {
     @Query(value = "select * from house where status = 1",nativeQuery = true)
     Page<House> findAll(Pageable pageable);
 //    Iterable<House> findAllByCategory_Id(Long id);
-//    @Query(value = "select * from house where status = :status",nativeQuery = true)
-//    Page<House> findByStatus (@Param("status") int bathroom, Pageable pageable);
 
     Page<House> findAllByCategory_Id(Long id, Pageable pageable);
     @Query(value = "select * from house where bedroom = :bedroom",nativeQuery = true)
@@ -29,4 +27,7 @@ public interface HouseRepository extends JpaRepository<House,Long> {
 
 
 
+
+    @Query(value = "select * from house where owner_id = :owner_id",nativeQuery = true)
+    Iterable<House> findByOwnerId (@Param("owner_id") int owner_id);
 }

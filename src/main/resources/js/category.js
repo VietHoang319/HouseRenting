@@ -1,15 +1,23 @@
-let categoryList = document.getElementById("listCategory");
 function findAllCategory() {
+    let categoryList = document.getElementById("listCategory");
     $.ajax({
         type: "GET",
         url: "http://localhost:8080/categories",
         success: function (data) {
             let str = ""
             for (let i = 0; i < data.length; i++) {
-                str += `<li><a href="#">${data[i].name}</a></li> `
+                str += `<span class="list-group-item" onclick="searchByCategoryId(${data[i].id})">${data[i].name}</span>`
             }
             categoryList.innerHTML = str;
-            console.log(data)
         }
     })
+}
+function searchByCategoryId(id) {
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/categories/"+id,
+        success: function (data) {
+            display(data.content);
+        }
+    });
 }

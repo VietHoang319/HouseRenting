@@ -7,14 +7,10 @@ function showLogin() {
             </nav>
         </div>
     </div>
-
-
     <div id="login-div">
         <h3 >Đăng nhập</h3>
-
         <label for="username">Tên đăng nhập</label>
         <input type="text" placeholder="Nhập tên đăng nhập" id="username">
-
         <label for="password">Mật khẩu</label>
         <input type="password" placeholder="Nhập mật khẩu" id="password">
         <button class="btn-login" onclick="login()">Đăng nhập</button>
@@ -24,8 +20,45 @@ function showLogin() {
     content.html(str)
 }
 
-function login() {
-    API="http://localhost:8080/houses"
+function showModal() {
+    let str = `
+    `
+
+}
+
+function login(){
+    let usn = document.getElementById("username").value;
+    let pw = document.getElementById("password").value;
+    let user = {
+        username: usn,
+        password: pw,
+    }
+    $.ajax({
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        type: 'POST',
+        url: API + "/login",
+        data: JSON.stringify(user),
+        success: function (data) {
+            token = data.accessToken
+            localStorage.setItem(tokenKey, JSON.stringify(token))
+            localStorage.setItem("id", JSON.stringify(data.id))
+            localStorage.setItem("name", data.username)
+            showHome()
+        },
+        error: function (error) {
+            console.log(error)
+        }
+    })
+}
+
+function logout(){
+    localStorage.removeItem('token');
+}
+
+function login(){
 
     let usn = document.getElementById("username").value;
     let pw = document.getElementById("password").value;
@@ -42,8 +75,11 @@ function login() {
         url: API + "/login",
         data: JSON.stringify(user),
         success: function (data) {
-            console.log(data)
-            localStorage.setItem('token',data.accessToken);
+            token = data.accessToken
+            localStorage.setItem(tokenKey, JSON.stringify(token))
+            localStorage.setItem("id", JSON.stringify(data.id))
+            localStorage.setItem("name", data.username)
+            showHome()
         },
         error: function (error) {
             console.log(error)
@@ -52,5 +88,12 @@ function login() {
 }
 
 function logout(){
-    localStorage.removeItem('token');
+    token=""
+    userId=""
+    userName=""
+    localStorage.setItem("token", token)
+    localStorage.setItem("id", userId)
+    localStorage.setItem("name", userName)
+    showHome()
+    // localStorage.removeItem('token');
 }

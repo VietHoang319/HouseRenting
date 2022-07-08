@@ -21,12 +21,6 @@ public class HouseController {
     @Autowired
     HouseServiceImpl houseService;
 
-    @GetMapping
-    public ResponseEntity<Page<House>> findAllHouse(@PageableDefault(value = 2) Pageable pageable) {
-        Page<House> houses = houseService.findAll(pageable);
-        return new ResponseEntity<>(houses, HttpStatus.OK);
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<House> findById(@PathVariable Long id) {
         Optional<House> houseOptional = houseService.findById(id);
@@ -65,6 +59,18 @@ public class HouseController {
         houseService.save(houseOptional.get());
         return new ResponseEntity<>(houseOptional.get(), HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping("/find-by-ownerId")  // Tìm theo id User đăng nhập để ra số house đã đăng của id đó!
+    public ResponseEntity<Iterable<House>> findHouseByOwnerId (@RequestParam(value = "owner_id") int owner_id) {
+        List <House> houses = (List<House>) houseService.findByOwnerId(owner_id);
+        if (houses.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(houses, HttpStatus.OK);
+    }
+
+
+
 
 //    @GetMapping("/category/{id}")
 //    public ResponseEntity<Iterable<House>> findCategoryId(@PathVariable Long id) {

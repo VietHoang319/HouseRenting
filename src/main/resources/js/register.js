@@ -7,14 +7,10 @@ function showRegister() {
             </nav>
         </div>
     </div>
-
-
     <div id="login-div">
         <h3 >Đăng ký</h3>
-
         <label for="username">Tên đăng nhập</label>
         <input type="text" placeholder="Nhập tên đăng nhập" id="username">
-
         <label for="password">Mật khẩu</label>
         <input type="password" placeholder="Nhập mật khẩu" id="password">
         <label for="rePassword">Nhập lại mật khẩu</label>
@@ -24,29 +20,31 @@ function showRegister() {
         <button class="btn-login" onclick="register()" data-toggle="modal" data-target="#registerModal">Đăng ký</button>
         <button class="btn-login" onclick="showLogin()">Đăng nhập</button>
     </div>
-
     <!-- Modal -->
-    <div class="modal fade" id="registerModal" data-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+        <div class="modal fade" id="registerModal" data-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="modal-body">
+                <p id="loginStatus"></p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn-save" onclick="closeModalRegister()" >Save changes</button>
+              </div>
+            </div>
           </div>
-          <div class="modal-body" id="modal-body">
-            <p id="loginStatus"></p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="showLogin()">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>`
+        </div>`
 
     content.html(str)
+
 }
+
+
 
 function register() {
     API="http://localhost:8080/houses"
@@ -77,4 +75,13 @@ function register() {
             console.log(error)
         },
     })
+}
+
+function closeModalRegister() {
+    let abc = document.getElementsByClassName("modal-backdrop")
+    for (let i = 0; i < abc.length; i++) {
+        abc[i].style.width = 0;
+        abc[i].style.height = 0;
+    }
+    showLogin()
 }

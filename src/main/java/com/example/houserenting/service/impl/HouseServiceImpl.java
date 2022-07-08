@@ -65,6 +65,11 @@ public class HouseServiceImpl implements HouseService {
 //        return houseRepository.findByStatus(status,pageable);
 //    }
 
+    @Override
+    public Iterable<House> findByOwnerId(int owner_id) {
+        return houseRepository.findByOwnerId(owner_id);
+    }
+
 
 //    Cái này tìm không phân trang
 //    @Override
