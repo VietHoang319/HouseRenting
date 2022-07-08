@@ -21,6 +21,7 @@ public class HouseController {
     @Autowired
     HouseServiceImpl houseService;
 
+
     @GetMapping("/{id}")
     public ResponseEntity<House> findById(@PathVariable Long id) {
         Optional<House> houseOptional = houseService.findById(id);
@@ -32,9 +33,8 @@ public class HouseController {
 
     @PostMapping
     public ResponseEntity<House> saveHouse(@Valid @RequestBody House house) {
-        house.setStatus(1);
         houseService.save(house);
-        return new ResponseEntity<>(house, HttpStatus.CREATED);
+        return new ResponseEntity<>(houseService.findLastHouse(), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
@@ -61,7 +61,7 @@ public class HouseController {
     }
 
     @GetMapping("/find-by-ownerId")  // Tìm theo id User đăng nhập để ra số house đã đăng của id đó!
-    public ResponseEntity<Iterable<House>> findHouseByOwnerId (@RequestParam(value = "owner_id") int owner_id) {
+    public ResponseEntity<Iterable<House>> findHouseByOwnerId (@RequestParam(value = "owner_id") Long owner_id) {
         List <House> houses = (List<House>) houseService.findByOwnerId(owner_id);
         if (houses.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

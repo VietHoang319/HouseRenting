@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface HouseRepository extends JpaRepository<House,Long> {
     @Query(value = "select * from house where status = 1",nativeQuery = true)
@@ -16,6 +18,9 @@ public interface HouseRepository extends JpaRepository<House,Long> {
 
     Page<House> findAllByCategory_Id(Long id, Pageable pageable);
 
-    @Query(value = "select * from house where owner_id = :owner_id",nativeQuery = true)
-    Iterable<House> findByOwnerId (@Param("owner_id") int owner_id);
+    @Query(value = "select * from house where owner_id = :owner_id and status = 1",nativeQuery = true)
+    Iterable<House> findByOwnerId(@Param("owner_id") Long owner_id);
+
+    @Query(value = "select * from house order by id desc limit 1", nativeQuery = true)
+    House findLastHouse();
 }
