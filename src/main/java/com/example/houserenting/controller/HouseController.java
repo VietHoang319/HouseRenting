@@ -80,7 +80,26 @@ public class HouseController {
 //        return new ResponseEntity<>(houses, HttpStatus.OK);
 //    }
 
+    @GetMapping("/find-by-bedroom")
+    public ResponseEntity<Page<House>> findHouseByBedroom(@RequestParam(value = "bedroom") int bedroom, @PageableDefault(value = 2) Pageable pageable) {
+        Page <House> houses = houseService.findAllByBedroom(bedroom, pageable);
+        return new ResponseEntity<>(houses, HttpStatus.OK);
+    }
 
+    @GetMapping("/find-by-bathroom")
+    public ResponseEntity<Page<House>> findHouseByBathroom(@RequestParam(value = "bathroom") int bathroom, @PageableDefault(value = 2) Pageable pageable) {
+        Page <House> houses = houseService.findAllByBathroom(bathroom, pageable);
+        return new ResponseEntity<>(houses, HttpStatus.OK);
+    }
 
-
+    @GetMapping("/find-by-bathroom-and-bedroom")
+    public ResponseEntity<Page<House>>findHouseByBathroomAndBedroom(@RequestParam(value = "bathroom")int bathroom,@RequestParam(value = "bedroom") int bedroom,@PageableDefault(value = 2) Pageable pageable ){
+        Page<House> houses = houseService.findAllByBathroomAndBedroom(bathroom, bedroom, pageable);
+        return new ResponseEntity<>(houses, HttpStatus.OK);
+    }
+//    @GetMapping("find-all-by-status")
+//    public ResponseEntity<Page<House>>findHouseByStatus(@RequestParam(value = "status")int status,@PageableDefault(value = 2) Pageable pageable){
+//        Page<House> houses =houseService.findAllByStatus(status,pageable);
+//        return new ResponseEntity<>(houses,HttpStatus.OK);
+//    }
 }

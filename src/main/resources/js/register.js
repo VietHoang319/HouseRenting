@@ -49,6 +49,7 @@ function showRegister() {
 }
 
 function register() {
+    API="http://localhost:8080/houses"
     let username = document.getElementById("username").value
     let password = document.getElementById("password").value
     let confirmPassword = document.getElementById("rePassword").value

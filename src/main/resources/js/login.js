@@ -25,6 +25,7 @@ function showLogin() {
 }
 
 function login() {
+    API="http://localhost:8080/houses"
 
     let usn = document.getElementById("username").value;
     let pw = document.getElementById("password").value;

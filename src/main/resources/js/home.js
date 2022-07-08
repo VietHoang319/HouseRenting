@@ -1,5 +1,4 @@
 let content = $("#content")
-const API = "http://localhost:8080"
 
 function showHome() {
     let str = `
@@ -96,16 +95,8 @@ function findAll() {
     });
 }
 
-function findAll() {
-    $.ajax({
-        type: "GET",
-        url: "http://localhost:8080/houses",
-        success: function (data) {
-            console.log(data);
-            dislpay(data.content);
-        }
-    });
-}
+
+
 
 function dislpay(data) {
     let tbody = document.getElementById("list")
@@ -128,35 +119,7 @@ function dislpay(data) {
     }
     tbody.innerHTML = str;
 }
-
-
-
-
-
 showHome()
-
-function dislpay(data) {
-    let tbody = document.getElementById("list")
-    let str = "";
-    for (let i=0; i<data.length; i++) {
-        str += `
-                            <div class="col-4 mt-4 content">
-                            <div class="card" style="width: 18rem;">
-                              <img class="image-card" src="https://nhadepsang.com.vn/images/2017/08/20-hinh-anh-noi-bat-cho-mau-nha-dep-1-tang-o-nong-thon-3.jpg" class="card-img-top" alt="...">
-                              <div class="card-body">
-                                <h3 class="card-title">${data[i].name}</h3>
-                                <p><i class="fa-solid fa-location-dot"></i> ${data[i].address}</p>
-                                <p class="card-text"><span><i class="fa-solid fa-bed"></i> ${data[i].bedroom} phòng ngủ</span>
-                                <span><i class="fa-solid fa-bath"></i> ${data[i].bathroom} phòng tắm</span></p>
-                                <p><h4>Giá: ${data[i].price} (bạt/đêm)</h4></p>
-                              </div>
-                            </div>
-                        </div>
-`
-    }
-    tbody.innerHTML = str;
-}
-
 
 
 
