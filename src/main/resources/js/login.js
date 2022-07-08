@@ -20,6 +20,12 @@ function showLogin() {
     content.html(str)
 }
 
+function showModal() {
+    let str = `
+    `
+
+}
+
 function login(){
     let usn = document.getElementById("username").value;
     let pw = document.getElementById("password").value;

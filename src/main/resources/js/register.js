@@ -21,27 +21,30 @@ function showRegister() {
         <button class="btn-login" onclick="showLogin()">Đăng nhập</button>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="registerModal" data-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+        <div class="modal fade" id="registerModal" data-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="modal-body">
+                <p id="loginStatus"></p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn-save" onclick="closeModalRegister()" >Save changes</button>
+              </div>
+            </div>
           </div>
-          <div class="modal-body" id="modal-body">
-            <p id="loginStatus"></p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="showLogin()">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>`
+        </div>`
 
     content.html(str)
+
 }
+
+
 
 function register() {
     let username = document.getElementById("username").value
@@ -71,4 +74,16 @@ function register() {
             console.log(error)
         },
     })
+}
+
+function closeModalRegister() {
+    let abc = document.getElementsByClassName("modal-backdrop")
+    for (let i = 0; i < abc.length; i++) {
+        abc[i].style.width = 0;
+        abc[i].style.height = 0;
+    }
+    // $('#registerModal').modal('hide')
+    // let body = document.getElementById("body")
+    // body.classList.remove("modal-open")
+    showLogin()
 }
