@@ -43,9 +43,7 @@ function showHome() {
                         <li>
                             <div class="link">Số phòng ngủ<i class="fa fa-chevron-down"></i></div>
                             <ul class="submenu">
-                                <li><a href="#">1 Phòng Ngủ</a></li>
-                                <li><a href="#">2 Phòng Ngủ</a></li>
-                                <li><a href="#">3 Phòng Ngủ</a></li>
+                              
                             </ul>
                         </li>
                         <li>

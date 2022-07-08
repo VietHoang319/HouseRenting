@@ -1,7 +1,5 @@
-
-function searchByBedroomBathroom() {
+function searchByBedroom() {
     let bedroom= document.getElementById("bedroom").value;
-    let bathroom=document.getElementById("bathroom").value;
     $.ajax({
         headers: {
             headers:{
@@ -9,7 +7,7 @@ function searchByBedroomBathroom() {
             },
         },
         type: 'GET',
-        url: "http://localhost:8080/houses/find-by-bathroom-and-bedroom"+"?bathroom="+bathroom+"&bedroomm=" + bedroom,
+        url: "http://localhost:8080/houses/find-by-bedroom=" + bedroom,
         success: function (data) {
             let str = ""
             for (let i = 0; i < data.length; i++) {
