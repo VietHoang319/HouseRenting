@@ -3,7 +3,7 @@ function showLogin() {
         <div class="col-12 navdiv">
             <!--            navbar-->
             <nav class="navbar navbar-expand-lg navbar-light" id="navbar">
-                <b><a class="navbar-brand" href="#" id="logo">Sparrow</a></b>
+                <b><a class="navbar-brand" href="#" id="logo" onclick="showHome()">Sparrow</a></b>
             </nav>
         </div>
     </div>

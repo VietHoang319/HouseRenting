@@ -17,6 +17,11 @@ function searchByCategoryId(id) {
         type: "GET",
         url: "http://localhost:8080/categories/"+id,
         success: function (data) {
+            let content1 = $("#content1")
+            let str = `<div class="row" id="list">
+
+                    </div>`
+            content1.html(str)
             display(data.content);
         }
     });

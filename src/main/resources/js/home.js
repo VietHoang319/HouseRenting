@@ -16,7 +16,7 @@ function showHome() {
         <div class="col-12 navdiv">
             <!--            navbar-->
             <nav class="navbar navbar-expand-lg navbar-light" id="navbar">
-                <b><a class="navbar-brand" href="#" id="logo">Sparrow</a></b>
+                <b><a class="navbar-brand" href="#" id="logo" onclick="showHome()">Sparrow</a></b>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarScroll"
                         aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -35,7 +35,7 @@ function showHome() {
             str += `<div class="dropdown title-username">
                       <button class="dropdown-toggle btn-nav" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">${localStorage.getItem("name")}</button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <button class="dropdown-item">Nhà của bạn</button>
+                        <button class="dropdown-item" onclick="showMyHouse()">Nhà của bạn</button>
                         <button class="dropdown-item">Nhà đã thuê</button>
                         <button class="dropdown-item" onclick="logout()">Đăng xuất</button>
                       </div>
@@ -50,10 +50,10 @@ function showHome() {
     <br>
     <br>
     <div class="container">
-        <div class="row">
+        <div class="row" id="content0">
             <!--        dropdown-->
             <div class="col-2">
-            <div id="MainMenu" class="mt-4">
+              <div id="MainMenu" class="mt-4">
                 <div class="list-group panel">
                   <button href="#listCategory" class="list-group-item list-group-item-success header-dropdown" data-toggle="collapse" data-parent="#MainMenu">Loại phòng <i class="fa fa-caret-down" style="float: right"></i></button>
                   <div class="collapse" id="listCategory">
@@ -77,8 +77,10 @@ function showHome() {
               </div>
             </div>
             <div class="col-10">
-                <div class="row" id="list">
-                
+                <div id="content1">
+                    <div class="row" id="list">
+                    
+                    </div>
                 </div>
             </div>
         </div>
@@ -120,8 +122,6 @@ function display(data) {
     }
     tbody.innerHTML = str;
 }
-
-
 
 
 
