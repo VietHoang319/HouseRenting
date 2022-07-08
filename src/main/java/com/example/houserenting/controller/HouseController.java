@@ -1,5 +1,6 @@
 package com.example.houserenting.controller;
 
+import com.example.houserenting.model.Category;
 import com.example.houserenting.model.House;
 import com.example.houserenting.service.impl.HouseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,15 +62,13 @@ public class HouseController {
     }
 
     @GetMapping("/find-by-ownerId")  // Tìm theo id User đăng nhập để ra số house đã đăng của id đó!
-    public ResponseEntity<Iterable<House>> findHouseByOwnerId (@RequestParam(value = "owner_id") int owner_id) {
-        List <House> houses = (List<House>) houseService.findByOwnerId(owner_id);
+    public ResponseEntity<Iterable<House>> findHouseByOwnerId(@RequestParam(value = "owner_id") int owner_id) {
+        List<House> houses = (List<House>) houseService.findByOwnerId(owner_id);
         if (houses.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(houses, HttpStatus.OK);
     }
-
-
 
 
 //    @GetMapping("/category/{id}")
@@ -79,10 +78,15 @@ public class HouseController {
 //    }
 
 
-
 //    @GetMapping
 //    public ResponseEntity<Page<House>> findAllHouse(@PageableDefault(value = 2) Pageable pageable) {
 //        Page<House> houses = houseService.findAll(pageable);
 //        return new ResponseEntity<>(houses, HttpStatus.OK);
 //    }
+
+    @GetMapping("")
+    public ResponseEntity<Page<House>> findAll(@PageableDefault(value = 2) Pageable pageable) {
+        Page<House> houses = houseService.findAll(pageable);
+        return new ResponseEntity<>(houses, HttpStatus.OK);
+    }
 }

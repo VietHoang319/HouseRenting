@@ -9,7 +9,7 @@ function findAllCategory() {
                 str += `<span class="list-group-item" onclick="searchByCategoryId(${data[i].id})">${data[i].name}</span>`
             }
             categoryList.innerHTML = str;
-        }
+        }//lay noi dung cua câtegorylist
     })
 }
 function searchByCategoryId(id) {
