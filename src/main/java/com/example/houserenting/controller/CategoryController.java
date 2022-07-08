@@ -34,7 +34,7 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Page<House>> findCategoryId(@PathVariable Long id, @PageableDefault(value = 2) Pageable pageable) {
+    public ResponseEntity<Page<House>> findCategoryId(@PathVariable Long id, @PageableDefault(value = 9) Pageable pageable) {
         Page <House> houses = houseService.findAllByCategory_Id(id, pageable);
         return new ResponseEntity<>(houses, HttpStatus.OK);
     }
