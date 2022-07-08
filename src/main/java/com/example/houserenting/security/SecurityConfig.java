@@ -66,13 +66,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
     }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().ignoringAntMatchers("/**");
         http.httpBasic().authenticationEntryPoint(restServicesEntryPoint());
         http.authorizeRequests()
-                .antMatchers("/login", "/register", "/hello", "/home", "/categories/**").permitAll()
+                .antMatchers("/login", "/register", "/hello", "/home", "/categories/**","/orders","/images","/houses" ).permitAll()
                 .antMatchers("/users/**", "/houses/**").access("hasRole('ROLE_USER')")
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 .anyRequest().authenticated()

@@ -1,6 +1,5 @@
 package com.example.houserenting.controller;
 
-import com.example.houserenting.model.Category;
 import com.example.houserenting.model.Order;
 import com.example.houserenting.service.impl.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/orders")
-public class OderController {
+public class OrderController {
     @Autowired
     OrderServiceImpl orderService;
 
     @GetMapping
-    public ResponseEntity<Iterable<Order>> findAllOrder() {
-        return new ResponseEntity<>(orderService.findAll(),HttpStatus.OK);
+    public ResponseEntity<Iterable<Order>> findAllOd() {
+        return new ResponseEntity<>(orderService.findAllOrder(),HttpStatus.OK);
     }
     
 }

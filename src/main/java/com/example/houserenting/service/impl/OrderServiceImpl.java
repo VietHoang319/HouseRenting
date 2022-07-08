@@ -39,4 +39,9 @@ public class OrderServiceImpl implements OderService {
     public void remove(Long id) {
         orderRepository.deleteById(id);
     }
+
+    @Override
+    public Iterable<Order> findAllOrder() {
+        return orderRepository.findAll();
+    }
 }

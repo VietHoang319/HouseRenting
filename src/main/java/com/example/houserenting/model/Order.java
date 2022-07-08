@@ -15,7 +15,7 @@ public class Order {
     private User customer;
     private LocalDate startTime;
     private LocalDate endTime;
-    private int Total;
+    private int total;
 
     public Order() {
     }
@@ -61,10 +61,10 @@ public class Order {
     }
 
     public int getTotal() {
-        return Total;
+        return total;
     }
 
     public void setTotal(int total) {
-        Total = total;
+        total = total;
     }
 }
