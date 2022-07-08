@@ -6,13 +6,12 @@ function findAllCategory() {
         success: function (data) {
             let str = ""
             for (let i = 0; i < data.length; i++) {
-                str += `<span class="list-group-item">${data[i].name}</span>`
+                str += `<span class="list-group-item" onclick="searchByCategoryId(${data[i].id})">${data[i].name}</span>`
             }
             categoryList.innerHTML = str;
         }
     })
 }
-findAllCategory();
 function searchByCategoryId(id) {
     $.ajax({
         type: "GET",
