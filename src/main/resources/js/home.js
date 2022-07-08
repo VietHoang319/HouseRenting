@@ -131,8 +131,6 @@ function dislpay(data) {
 
 
 
-
-
 showHome()
 
 function dislpay(data) {
