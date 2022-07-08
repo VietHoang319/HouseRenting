@@ -21,12 +21,6 @@ public class HouseController {
     @Autowired
     HouseServiceImpl houseService;
 
-    @GetMapping
-    public ResponseEntity<Page<House>> findAllHouse(@PageableDefault(value = 9) Pageable pageable) {
-        Page<House> houses = houseService.findAll(pageable);
-        return new ResponseEntity<>(houses, HttpStatus.OK);
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<House> findById(@PathVariable Long id) {
         Optional<House> houseOptional = houseService.findById(id);
