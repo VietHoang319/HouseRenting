@@ -1,5 +1,6 @@
 package com.example.houserenting.controller;
 
+import com.example.houserenting.model.Category;
 import com.example.houserenting.model.House;
 import com.example.houserenting.service.impl.HouseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,15 +62,13 @@ public class HouseController {
     }
 
     @GetMapping("/find-by-ownerId")  // Tìm theo id User đăng nhập để ra số house đã đăng của id đó!
-    public ResponseEntity<Iterable<House>> findHouseByOwnerId (@RequestParam(value = "owner_id") int owner_id) {
-        List <House> houses = (List<House>) houseService.findByOwnerId(owner_id);
+    public ResponseEntity<Iterable<House>> findHouseByOwnerId(@RequestParam(value = "owner_id") int owner_id) {
+        List<House> houses = (List<House>) houseService.findByOwnerId(owner_id);
         if (houses.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(houses, HttpStatus.OK);
     }
-
-
 
 
 //    @GetMapping("/category/{id}")
@@ -79,33 +78,15 @@ public class HouseController {
 //    }
 
 
-
 //    @GetMapping
 //    public ResponseEntity<Page<House>> findAllHouse(@PageableDefault(value = 2) Pageable pageable) {
 //        Page<House> houses = houseService.findAll(pageable);
 //        return new ResponseEntity<>(houses, HttpStatus.OK);
 //    }
 
-    @GetMapping("/find-by-bedroom")
-    public ResponseEntity<Page<House>> findHouseByBedroom(@RequestParam(value = "bedroom") int bedroom, @PageableDefault(value = 2) Pageable pageable) {
-        Page <House> houses = houseService.findAllByBedroom(bedroom, pageable);
+    @GetMapping("")
+    public ResponseEntity<Page<House>> findAll(@PageableDefault(value = 2) Pageable pageable) {
+        Page<House> houses = houseService.findAll(pageable);
         return new ResponseEntity<>(houses, HttpStatus.OK);
     }
-
-    @GetMapping("/find-by-bathroom")
-    public ResponseEntity<Page<House>> findHouseByBathroom(@RequestParam(value = "bathroom") int bathroom, @PageableDefault(value = 2) Pageable pageable) {
-        Page <House> houses = houseService.findAllByBathroom(bathroom, pageable);
-        return new ResponseEntity<>(houses, HttpStatus.OK);
-    }
-
-    @GetMapping("/find-by-bathroom-and-bedroom")
-    public ResponseEntity<Page<House>>findHouseByBathroomAndBedroom(@RequestParam(value = "bathroom")int bathroom,@RequestParam(value = "bedroom") int bedroom,@PageableDefault(value = 2) Pageable pageable ){
-        Page<House> houses = houseService.findAllByBathroomAndBedroom(bathroom, bedroom, pageable);
-        return new ResponseEntity<>(houses, HttpStatus.OK);
-    }
-//    @GetMapping("find-all-by-status")
-//    public ResponseEntity<Page<House>>findHouseByStatus(@RequestParam(value = "status")int status,@PageableDefault(value = 2) Pageable pageable){
-//        Page<House> houses =houseService.findAllByStatus(status,pageable);
-//        return new ResponseEntity<>(houses,HttpStatus.OK);
-//    }
 }
