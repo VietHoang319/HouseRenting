@@ -82,8 +82,5 @@ function closeModalRegister() {
         abc[i].style.width = 0;
         abc[i].style.height = 0;
     }
-    // $('#registerModal').modal('hide')
-    // let body = document.getElementById("body")
-    // body.classList.remove("modal-open")
     showLogin()
 }
