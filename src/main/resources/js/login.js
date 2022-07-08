@@ -20,46 +20,7 @@ function showLogin() {
     content.html(str)
 }
 
-function showModal() {
-    let str = `
-    `
-
-}
-
 function login(){
-    let usn = document.getElementById("username").value;
-    let pw = document.getElementById("password").value;
-    let user = {
-        username: usn,
-        password: pw,
-    }
-    $.ajax({
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        type: 'POST',
-        url: API + "/login",
-        data: JSON.stringify(user),
-        success: function (data) {
-            token = data.accessToken
-            localStorage.setItem(tokenKey, JSON.stringify(token))
-            localStorage.setItem("id", JSON.stringify(data.id))
-            localStorage.setItem("name", data.username)
-            showHome()
-        },
-        error: function (error) {
-            console.log(error)
-        }
-    })
-}
-
-function logout(){
-    localStorage.removeItem('token');
-}
-
-function login(){
-
     let usn = document.getElementById("username").value;
     let pw = document.getElementById("password").value;
     let user = {
