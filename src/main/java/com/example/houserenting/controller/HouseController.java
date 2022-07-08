@@ -22,15 +22,6 @@ public class HouseController {
     @Autowired
     HouseServiceImpl houseService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<House> findById(@PathVariable Long id) {
-        Optional<House> houseOptional = houseService.findById(id);
-        if (!houseOptional.isPresent()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(houseOptional.get(), HttpStatus.OK);
-    }
-
     @PostMapping
     public ResponseEntity<House> saveHouse(@Valid @RequestBody House house) {
         house.setStatus(1);

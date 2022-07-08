@@ -1,9 +1,9 @@
 package com.example.houserenting.model;
 
+import org.springframework.data.repository.query.Param;
+
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -16,15 +16,21 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Tên đăng nhập không được trống")
     @Column(unique = true, nullable = false)
     private String username;
 
+    @NotBlank(message = "Mật khẩu không được trống")
+    @Size(min = 6, max = 8, message = "Mật khẩu từ 6 đến 8 ký tự")
     @Column(nullable = false)
     private String password;
 
+    @NotBlank(message = "Mật khẩu nhập lại không được trống")
     @Column(nullable = false)
     private String confirmPassword;
 
+    @NotBlank(message = "Số điện thoại không được trống")
+    @Pattern(regexp = "^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$", message = "Số điện thoại không đúng định dạng")
     @Column(nullable = false)
     private String phone;
     private boolean enabled = true;

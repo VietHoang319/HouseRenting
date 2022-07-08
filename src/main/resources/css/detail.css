@@ -1,0 +1,16 @@
+.info-frame {
+    border: 2px solid black;
+    margin-bottom: 3%;
+    font-size: 20px;
+}
+
+.image-info {
+    width: 100% !important;
+    height: 800px !important;
+}
+
+.btn-crud {
+    border: 2px solid black;
+    width: 20%;
+    /*margin: 0 6% 0 6%;*/
+}

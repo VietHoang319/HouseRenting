@@ -17,7 +17,7 @@ function showRegister() {
         <input type="password" placeholder="Nhập lại mật khẩu" id="rePassword">
         <label for="phone">Số điện thoại</label>
         <input type="tel" placeholder="Nhập số điện thoại" id="phone">
-        <button class="btn-login" onclick="register()" data-toggle="modal" data-target="#registerModal">Đăng ký</button>
+        <button class="btn-login" onclick="register()">Đăng ký</button>
         <button class="btn-login" onclick="showLogin()">Đăng nhập</button>
     </div>
     <!-- Modal -->
@@ -44,10 +44,7 @@ function showRegister() {
 
 }
 
-
-
 function register() {
-    const API="http://localhost:8080/houses"
     let username = document.getElementById("username").value
     let password = document.getElementById("password").value
     let confirmPassword = document.getElementById("rePassword").value

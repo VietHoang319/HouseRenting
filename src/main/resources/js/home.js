@@ -108,7 +108,7 @@ function display(data) {
     let str = "";
     for (let i = 0; i < data.length; i++) {
         str += `<div class="col-4 mt-4 content">
-                            <div class="card" style="width: 18rem;">
+                            <div class="card" style="width: 18rem;" onclick="showOrderHouseDetail(${data[i].id})">
                               <img class="image-card" src="https://nhadepsang.com.vn/images/2017/08/20-hinh-anh-noi-bat-cho-mau-nha-dep-1-tang-o-nong-thon-3.jpg" class="card-img-top" alt="...">
                               <div class="card-body">
                                 <h3 class="card-title">${data[i].name}</h3>

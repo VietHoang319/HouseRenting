@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/home")
@@ -33,5 +35,14 @@ public class HomeController {
     public ResponseEntity<Page<House>> findHouseByBathroom(@RequestParam(value = "bathroom") int bathroom, @PageableDefault(value = 2) Pageable pageable) {
         Page<House> houses = houseService.findAllByBathroom(bathroom, pageable);
         return new ResponseEntity<>(houses, HttpStatus.OK);
+    }
+
+    @GetMapping("/house/{id}")
+    public ResponseEntity<House> findById(@PathVariable Long id) {
+        Optional<House> houseOptional = houseService.findById(id);
+        if (!houseOptional.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(houseOptional.get(), HttpStatus.OK);
     }
 }
