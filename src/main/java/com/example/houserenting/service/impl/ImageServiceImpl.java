@@ -18,7 +18,7 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public Page<Image> findAll(Pageable pageable) {
-        return imageRepository.findAll(pageable);
+        return null;
     }
 
     @Override
@@ -39,5 +39,10 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public void remove(Long id) {
         imageRepository.deleteById(id);
+    }
+
+    @Override
+    public Iterable<Image> findAllImg() {
+        return imageRepository.findAll();
     }
 }
