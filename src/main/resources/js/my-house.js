@@ -1,6 +1,4 @@
-let addForm = document.getElementById('addForm');
-let categorySelect = document.getElementById('categoryId');
-let role;
+let categorySelect = document.getElementById('categoryId');;
 
 function showMyHouse() {
     let content0 = $("#content0")
@@ -57,7 +55,6 @@ function showAddForm() {
 }
 
 function save() {
-
     let name = $("#nameA");
     let address = $("#addressA");
     let bedroom = $("#bedroomA");
@@ -80,19 +77,6 @@ function save() {
         owner: {
             id: localStorage.getItem("id")
         }
-        // name: name,
-        // address: address,
-        // bedroom : bedroom,
-        // bathroom:bathroom,
-        // price : price,
-        // description: description,
-        // status: 1,
-        // category : {
-        //     id : category
-        // },
-        // owner: {
-        //     id: localStorage.getItem("id")
-        // }
     }
     console.log(house);
 
