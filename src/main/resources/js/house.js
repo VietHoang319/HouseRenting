@@ -12,7 +12,11 @@ function showHouseDetail(id) {
                         
                             </div>
                             <div class="row mt-4 mb-4">
-                                <button class="btn-nav btn-crud">Thêm ảnh</button>
+                                <div class="input-file-container btn-crud btn-nav">
+<!--                                    <label tabindex="0" for="my-file" class="input-file-trigger ">Thêm ảnh</label>-->
+                                    <span">Thêm ảnh</span>
+                                    <input class="input-file" id="my-file" type="file">
+                                </div>
                                 <button class="btn-nav btn-crud">Sửa thông tin</button>
                                 <button class="btn-nav btn-crud">Xóa nhà đã đăng</button>
                             </div>
