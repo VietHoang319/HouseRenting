@@ -110,8 +110,8 @@ function showOrder(id) {
                             </div>
                             <div class="row mt-4 mb-4">
                                 <div class="col-12">
-                                    <button class="btn-nav btn-order" type="button" style="width: 100%"
-                                            onclick="showOrder()">Thuê nhà
+                                    <button class="btn-nav btn-order" type="button"  style="width: 100%"
+                                            onclick="showModalOrder(${id})">Thuê nhà
                                     </button>
                                 </div>
                             </div>
@@ -186,4 +186,52 @@ function showBill(price) {
 function getDifferenceInDays(date1, date2) {
     const diffInMs = Math.abs(date2 - date1);
     return diffInMs / (1000 * 60 * 60 * 24);
+}
+
+function showModalOrder(id) {
+    let strFooter = `<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                     <button type="button" class="btn btn-primary" onclick="order(${id})">Thuê</button>`
+    modalFooter.html(strFooter)
+    let strBody = `<p>Bạn có chắc muốn thuê căn nhà này không?</p>`
+    modalBody.html(strBody)
+    modal.modal("show")
+}
+
+function order(id) {
+    let order = {
+        house: {
+            id: id
+        },
+        customer: {
+            id: localStorage.getItem("id")
+        },
+        startTime: $("#startDate").val(),
+        endTime: $("#endDate").val(),
+        total: parseInt($("#total").text()),
+        status: 1
+    }
+    console.log(order)
+    $.ajax({
+        headers: {
+            Authorization: 'Bearer ' + token,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        type: "POST",
+        url: "http://localhost:8080/orders",
+        data: JSON.stringify(order),
+        success: function () {
+            showModalNoficationCreated()
+        },
+        error: function (error) {
+            console.log(error)
+        }
+    })
+}
+
+function showModalNoficationCreated() {
+    let strFooter = `<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="showHome()">Ok</button>`
+    modalFooter.html(strFooter)
+    let strBody = `<p>Thuê nhà thành công</p>`
+    modalBody.html(strBody)
 }
