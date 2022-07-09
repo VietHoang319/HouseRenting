@@ -13,7 +13,7 @@ function showHouseDetail(id) {
                             </div>
                             <div class="row mt-4 mb-4">
                                 <button class="btn-nav btn-crud">Thêm ảnh</button>
-                                <button class="btn-nav btn-crud">Sửa thông tin</button>
+                                <button class="btn-nav btn-crud" data-toggle="modal" data-target="#exampleModal1" onclick="showEditForm(${id})" >Sửa thông tin</button>                            
                                 <button class="btn-nav btn-crud">Xóa nhà đã đăng</button>
                             </div>
                         </div>
