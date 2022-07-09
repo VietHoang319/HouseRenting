@@ -158,7 +158,8 @@ function showEditForm(id){
             document.getElementById('bathroomEdit').value = data.bathroom;
             document.getElementById('priceEdit').value = data.price;
             document.getElementById('descriptionEdit').value = data.description;
-
+            document.getElementById("categoryIdEdit").value = data.category.id;
+            document.getElementById("statusEdit").value = data.status;
         }
     });
     $.ajax({
@@ -184,15 +185,17 @@ function update() {
     let price = document.getElementById('priceEdit').value;
     let description = document.getElementById('descriptionEdit').value;
     let categoryId = document.getElementById('categoryIdEdit').value;
+    let status = document.getElementById('statusEdit').value;
 
     let house = {
+        id:id,
         name: name,
         address:address,
         bedroom:bedroom,
         bathroom:bathroom,
         price:price,
         description:description,
-        status: 1,
+        status: status,
         category : {
             id : categoryId
         },
@@ -230,8 +233,4 @@ function update() {
             console.log(error)
         }
     })
-
-
-
-
 }
