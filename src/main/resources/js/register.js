@@ -19,29 +19,8 @@ function showRegister() {
         <input type="tel" placeholder="Nhập số điện thoại" id="phone">
         <button class="btn-login" onclick="register()">Đăng ký</button>
         <button class="btn-login" onclick="showLogin()">Đăng nhập</button>
-    </div>
-    <!-- Modal -->
-        <div class="modal fade" id="registerModal" data-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body" id="modal-body">
-                <p id="loginStatus"></p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn-save" onclick="closeModalRegister()" >Save changes</button>
-              </div>
-            </div>
-          </div>
-        </div>`
-
+    </div>`
     content.html(str)
-
 }
 
 function register() {
@@ -49,7 +28,6 @@ function register() {
     let password = document.getElementById("password").value
     let confirmPassword = document.getElementById("rePassword").value
     let phone = document.getElementById("phone").value
-    let status = document.getElementById("loginStatus")
     let user = {
         username: username,
         password: password,
@@ -65,8 +43,11 @@ function register() {
         url: API + "/register",
         data: JSON.stringify(user),
         success: function () {
-            $('#registerModal').modal('show')
-            status.innerText = "Đăng ký thành công"
+            let strBody = `<p>Đăng ký thành công</p>`
+            modalBody.html(strBody)
+            let strFooter = `<button type="button" class="btn btn-primary" data-dismiss="modal" id="btn-save" onclick="closeModalRegister()" >Save changes</button>`
+            modalFooter.html(strFooter)
+            modal.modal("show")
         },
         error: function (error) {
             console.log(error)
@@ -75,10 +56,5 @@ function register() {
 }
 
 function closeModalRegister() {
-    let abc = document.getElementsByClassName("modal-backdrop")
-    for (let i = 0; i < abc.length; i++) {
-        abc[i].style.width = 0;
-        abc[i].style.height = 0;
-    }
     showLogin()
 }

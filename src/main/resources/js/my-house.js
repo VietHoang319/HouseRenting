@@ -4,8 +4,8 @@ let role;
 
 function showMyHouse() {
     let content0 = $("#content0")
-let str = `     <div class="row">
-                    <button class="mt-4 btn-nav" style="border: 2px solid black">Thêm nhà</button>
+    let str = `     <div class="row">
+                    <button class="mt-4 btn-nav" style="border: 2px solid black" onclick="showAddForm()">Thêm nhà</button>
                 </div>
                 <div class="col-12">
                     <div id="content1">
@@ -19,7 +19,29 @@ let str = `     <div class="row">
 }
 
 function showAddForm() {
-    $('#exampleModal').modal('show');
+    modal.modal('show');
+    let strBody = `<div id="addForm">
+                     <label style="color: black"> Tên: </label>
+                    <input type="text" name="name" class="form-control" id="nameA">
+                    <label style="color: black"> Địa chỉ: </label>
+                    <input type="text" name="address" class="form-control" id="addressA">
+                    <label style="color: black"> Số phòng ngủ: </label>
+                    <input type="number" name="bedroom" class="form-control" id="bedroomA">
+                    <label style="color: black"> Số phòng tắm: </label>
+                    <input type="number" name="bathroom" class="form-control" id="bathroomA">
+                    <label style="color: black"> Giá sếp Hoàng mong muốn: </label>
+                    <input type="number" name="price" class="form-control" id="priceA">
+                    <label style="color: black"> Mô tả: </label>
+                    <input type="text" name="description" class="form-control" id="descriptionA">
+                    <label style="color: black"> Phân loại: </label>
+                    <select id="categoryId" name="categoryId" class="form-control">
+
+                    </select>
+                </div>`
+    modalBody.html(strBody)
+    let strFooter = `<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="save()" >Lưu</button>`
+    modalFooter.html(strFooter)
     $.ajax({
         type: "GET",
         url: "http://localhost:8080/categories",

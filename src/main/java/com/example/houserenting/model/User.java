@@ -21,7 +21,6 @@ public class User implements Serializable {
     private String username;
 
     @NotBlank(message = "Mật khẩu không được trống")
-    @Size(min = 6, max = 8, message = "Mật khẩu từ 6 đến 8 ký tự")
     @Column(nullable = false)
     private String password;
 

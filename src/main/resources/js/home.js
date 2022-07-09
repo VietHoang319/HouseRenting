@@ -6,6 +6,9 @@ let userId = "";
 localStorage.setItem("id", JSON.stringify(userId))
 let userName = "";
 localStorage.setItem("name", userName)
+let modal = $("#exampleModal")
+let modalBody = $("#modalBody")
+let modalFooter = $("#modalFooter")
 const API = "http://localhost:8080"
 
 showHome()
