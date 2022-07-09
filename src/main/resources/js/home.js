@@ -1,9 +1,9 @@
 let content = $("#content")
 let tokenKey = "token"
 let token = "";
-localStorage.setItem(tokenKey, token)
+localStorage.setItem(tokenKey, JSON.stringify(token))
 let userId = "";
-localStorage.setItem("id", JSON.stringify(userId))
+localStorage.setItem("id", userId)
 let userName = "";
 localStorage.setItem("name", userName)
 let modal = $("#exampleModal")

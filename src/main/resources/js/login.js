@@ -37,6 +37,8 @@ function login(){
         data: JSON.stringify(user),
         success: function (data) {
             token = data.accessToken
+            id = data.id
+            name = data.username
             localStorage.setItem(tokenKey, JSON.stringify(token))
             localStorage.setItem("id", JSON.stringify(data.id))
             localStorage.setItem("name", data.username)

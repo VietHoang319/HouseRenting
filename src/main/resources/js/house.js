@@ -64,3 +64,37 @@ function showHouseDetail(id) {
     content0.html(str)
     getHouse(id)
 }
+
+function getHouse(id) {
+    let infoFrame = $("#infoFrame")
+    let str = "";
+    $.ajax({
+        type: 'GET',
+        url: "http://localhost:8080/home/house/" + id,
+        success: function (data) {
+            console.log(data)
+            let description = "";
+            let status = "Trống";
+            if (data.description !== null) {
+                description = data.description
+            }
+            if (data.status === 2) {
+                status = "Đã thuê"
+            }
+            else if (data.status === 3) {
+                status = "Đang nâng cấp"
+            }
+            str += `<h2 style="margin-top: 2%">${data.name}</h2>
+                    <p><i class="fa-solid fa-location-dot"></i> ${data.address}</p>
+                    <p>
+                        <span style="margin: 0 3% 0 0"><i class="fa-solid fa-bed"></i> ${data.bedroom} phòng ngủ</span>
+                        <span><i class="fa-solid fa-bath"></i> ${data.bathroom} nhà tắm</span>
+                    </p>
+                    <p><b>Loại phòng: </b> ${data.category.name}</p>
+                    <p><b>Mô tả chung: </b> ${description}</p>
+                    <p><b>Trạng thái: </b> ${status}</p>
+                    <h4>Giá: ${data.price} (bạt/đêm)</h4>`
+            infoFrame.html(str)
+        }
+    })
+}
