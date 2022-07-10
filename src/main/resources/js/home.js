@@ -107,6 +107,7 @@ function findAll() {
 function display(data, flag) {
     let tbody = document.getElementById("list")
     let str = "";
+    
     for (let i = 0; i < data.length; i++) {
         str += `<div class="col-4 mt-4 content">`
             if (flag == true) {
@@ -115,7 +116,7 @@ function display(data, flag) {
             else {
                 str += `<div class="card" style="width: 18rem;" onclick="showHouseDetail(${data[i].id})">`
             }
-            str += `<img class="image-card" src="https://nhadepsang.com.vn/images/2017/08/20-hinh-anh-noi-bat-cho-mau-nha-dep-1-tang-o-nong-thon-3.jpg" class="card-img-top" alt="...">
+            str += `<img class="image-card" id="imageCard" class="card-img-top" alt="...">
                       <div class="card-body">
                         <h3 class="card-title">${data[i].name}</h3>
                         <p><i class="fa-solid fa-location-dot"></i> ${data[i].address}</p>
@@ -125,11 +126,17 @@ function display(data, flag) {
                       </div>
                     </div>
                 </div>`
+        getImageById(data[i].id)
     }
     tbody.innerHTML = str;
 }
 
-
-
-
-
+function getImageById(id) {
+    $.ajax({
+        type: 'GET',
+        url: "http://localhost:8080/images/house/" + id,
+        success: function (data) {
+            document.getElementById("imageCard").src = data.image
+        }
+    })
+}

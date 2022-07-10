@@ -23,30 +23,12 @@ function showHouseDetail(id) {
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                                    <ol class="carousel-indicators">
-                                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                                        <li data-target="#carouselExampleIndicators" data-slide-to="3" ></li>
+                                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" id="carousel">
+                                    <ol class="carousel-indicators" id="carouselIndicators">
+                                        
                                     </ol>
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active">
-                                            <img src="https://akisa.vn/uploads/plugin/product_items/13551/mau-biet-thu-nha-dep-2-tang-hien-dai-bt21377-v2.jpg"
-                                                 class="image-info" alt="...">
-                                        </div>
-                                        <div class="carousel-item">
-                                            <img src="https://katahome.com/wp-content/uploads/2021/03/Thiet-ke-nha-dep-3-tang-tan-co-dien-mai-nhat-bt-31023-01.jpg"
-                                                 class="image-info" alt="...">
-                                        </div>
-                                        <div class="carousel-item">
-                                            <img src="https://thietkenhadepaau.com/wp-content/uploads/2021/05/biet-thu-2-tang-8-mat-tien.jpg"
-                                                 class="image-info">
-                                        </div>
-                                        <div class="carousel-item">
-                                            <img src="https://thietkenhadepaau.com/wp-content/uploads/2021/05/biet-thu-2-tang-8-mat-tien.jpg"
-                                                 class="image-info">
-                                        </div>
+                                    <div class="carousel-inner" id="carouselInner">
+                                        
                                     </div>
                                     <button class="carousel-control-prev" type="button"
                                             data-target="#carouselExampleIndicators" data-slide="prev">
@@ -66,6 +48,7 @@ function showHouseDetail(id) {
             </div>
         </div>`
     content0.html(str)
+    findImagesByHouse(id)
     getHouse(id)
 }
 
@@ -102,3 +85,36 @@ function getHouse(id) {
         }
     })
 }
+
+function findImagesByHouse(id) {
+    $.ajax({
+        type: 'GET',
+        url: "http://localhost:8080/images/" + id,
+        success: function (data) {
+            let carouselIndicators = $("#carouselIndicators")
+            let str = ``
+            let carouselInner = $("#carouselInner")
+            let str1 = ``
+            for(let i = 0; i < data.length; i++) {
+                if(i === 0) {
+                    str += `<li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>`
+                    str1 += `<div class="carousel-item active image-info">
+                                            <img src="${data[i].image}"
+                                                 class="image-info" alt="...">
+                                        </div>`
+                }
+                else {
+                    str += `<li data-target="#carouselExampleIndicators" data-slide-to="${i}" ></li>`
+                    str1 += `<div class="carousel-item image-info">
+                                            <img src="${data[i].image}"
+                                                 class="image-info" alt="...">
+                                        </div>`
+                }
+
+            }
+            carouselIndicators.html(str)
+            carouselInner.html(str1)
+        }
+    })
+}
+

@@ -23,7 +23,7 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public Optional<Image> findById(Long id) {
-        return imageRepository.findById(id);
+        return null;
     }
 
     @Override
@@ -44,5 +44,15 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public Iterable<Image> findAllImg() {
         return imageRepository.findAll();
+    }
+
+    @Override
+    public Iterable<Image> findByHouse(Long id) {
+        return imageRepository.findImageByHouseId(id);
+    }
+
+    @Override
+    public Optional<Image> findCardByHouse(Long id) {
+        return imageRepository.findCardByHouseId(id);
     }
 }

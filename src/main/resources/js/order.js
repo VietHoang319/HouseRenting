@@ -17,30 +17,12 @@ function showOrderHouseDetail(id) {
             </div>
             <div class="row">
                 <div class="col-12">
-                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="3" ></li>
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" id="carousel">
+                        <ol class="carousel-indicators" id="carouselIndicators">
+                            
                         </ol>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="https://akisa.vn/uploads/plugin/product_items/13551/mau-biet-thu-nha-dep-2-tang-hien-dai-bt21377-v2.jpg"
-                                     class="image-info" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="https://katahome.com/wp-content/uploads/2021/03/Thiet-ke-nha-dep-3-tang-tan-co-dien-mai-nhat-bt-31023-01.jpg"
-                                     class="image-info" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="https://thietkenhadepaau.com/wp-content/uploads/2021/05/biet-thu-2-tang-8-mat-tien.jpg"
-                                     class="image-info">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="https://thietkenhadepaau.com/wp-content/uploads/2021/05/biet-thu-2-tang-8-mat-tien.jpg"
-                                     class="image-info">
-                            </div>
+                        <div class="carousel-inner" id="carouselInner">
+                            
                         </div>
                         <button class="carousel-control-prev" type="button"
                                 data-target="#carouselExampleIndicators" data-slide="prev">
@@ -58,6 +40,7 @@ function showOrderHouseDetail(id) {
         </div>`
     content1.html(str)
     getHouseDetail(id)
+    findImagesByHouse(id)
 }
 
 function getHouseDetail(id) {
