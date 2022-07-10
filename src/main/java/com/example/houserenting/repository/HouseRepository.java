@@ -29,7 +29,7 @@ public interface HouseRepository extends JpaRepository<House,Long> {
 
 
 
-    @Query(value = "select * from house where owner_id = :owner_id and status > 0",nativeQuery = true)
+    @Query(value = "select * from house where owner_id = :owner_id and status >= 1",nativeQuery = true)
     Iterable<House> findByOwnerId(@Param("owner_id") Long owner_id);
 
     @Query(value = "select * from house order by id desc limit 1", nativeQuery = true)
