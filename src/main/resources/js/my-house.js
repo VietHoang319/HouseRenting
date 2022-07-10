@@ -37,7 +37,7 @@ function showAddForm() {
 
                     </select>
                     <label style="color: black"> Chọn ảnh: </label>
-                    <input id="fileButton" type="file" value="upload" accept=".jpg;.jpeg; gif"  onchange="upload1(event)">
+                    <input id="fileButton" type="file" value="upload" accept=".jpg;.jpeg; gif" onchange="upload1(event)">
                 </div>`
     modalBody.html(strBody)
     let categorySelect = document.getElementById('categoryId');
@@ -50,7 +50,7 @@ function showAddForm() {
         success: function (data) {
             console.log(data)
             let str = "";
-            for (let i=0; i<data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
                 str += `<option value="${data[i].id}"> ${data[i].name}</option>`
             }
             categorySelect.innerHTML = str;
@@ -69,20 +69,19 @@ function save() {
 
     let house = {
         name: name.val(),
-        address : address.val(),
+        address: address.val(),
         bedroom: bathroom.val(),
         bathroom: bathroom.val(),
         price: price.val(),
         description: description.val(),
         status: 1,
-        category : {
-            id : category.val()
+        category: {
+            id: category.val()
         },
         owner: {
             id: localStorage.getItem("id")
         }
     }
-    console.log(house);
 
     $.ajax({
         headers: {
@@ -93,23 +92,31 @@ function save() {
         type: "POST",
         url: "http://localhost:8080/houses",
         data: JSON.stringify(house),
-        success: function () {
-            name.val("")
-            address.val("")
-            bedroom.val("")
-            bathroom.val("")
-            price.val("")
-            description.val("")
-            category : {
-                id : category.val("")
+        success: function (data) {
+            let imageUpLoad = {
+                image: localStorage.getItem(storageKeyImg),
+                house: {
+                    id: data.id
+                }
             }
-            showMyHouse()
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                type: 'Post',
+                url: "http://localhost:8080/images",
+                data: JSON.stringify(imageUpLoad),
+                success: function () {
+                    localStorage.setItem(storageKeyImg, "")
+                    showHouseDetail(data.id)
+                }
+            })
         },
         error: function (error) {
             console.log(error)
         }
     })
-
 }
 
 function findAllMyHouse() {
@@ -118,7 +125,7 @@ function findAllMyHouse() {
         headers: {
             Authorization: 'Bearer ' + token,
         },
-        url: "http://localhost:8080/houses/find-by-ownerId?owner_id="+ localStorage.getItem("id"),
+        url: "http://localhost:8080/houses/find-by-ownerId?owner_id=" + localStorage.getItem("id"),
         success: function (data) {
             console.log(data);
             display(data, false);
@@ -126,16 +133,16 @@ function findAllMyHouse() {
     });
 }
 
-function showEditForm(id){
+function showEditForm(id) {
     let categorySelect = document.getElementById('categoryIdEdit');
     $.ajax({
         type: "GET",
-        headers:{
+        headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token'),
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        url: "http://localhost:8080/home/house/"+id,
+        url: "http://localhost:8080/home/house/" + id,
         success: function (data) {
             console.log(data)
             document.getElementById('id').value = data.id;
@@ -155,7 +162,7 @@ function showEditForm(id){
         success: function (data) {
             console.log(data)
             let str = "";
-            for (let i=0; i<data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
                 str += `<option value="${data[i].id}"> ${data[i].name}</option>`
             }
             categorySelect.innerHTML = str;
@@ -175,23 +182,22 @@ function update() {
     let status = document.getElementById('statusEdit').value;
 
     let house = {
-        id:id,
+        id: id,
         name: name,
-        address:address,
-        bedroom:bedroom,
-        bathroom:bathroom,
-        price:price,
-        description:description,
+        address: address,
+        bedroom: bedroom,
+        bathroom: bathroom,
+        price: price,
+        description: description,
         status: status,
-        category : {
-            id : categoryId
+        category: {
+            id: categoryId
         },
         owner: {
             id: localStorage.getItem("id")
         }
     }
     console.log(house);
-
 
 
     $.ajax({

@@ -91,7 +91,7 @@ function upload(e, id) {
 function upload1(e) {
 
     // what happened
-    console.log('file upload event', e);
+    // console.log('file upload event', e);
 
     // get file
     var file = e.target.files[0];
@@ -108,15 +108,15 @@ function upload1(e) {
     // update progress bar
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
         function (snapshot) {
-            console.log(snapshot)
+            // console.log(snapshot)
             // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
             // console.log('Upload is ' + progress + '% done');
             switch (snapshot.state) {
                 case firebase.storage.TaskState.PAUSED: // or 'paused'
-                    console.log('Upload is paused');
+                    // console.log('Upload is paused');
                     break;
                 case firebase.storage.TaskState.RUNNING: // or 'running'
-                    console.log('Upload is running');
+                    // console.log('Upload is running');
                     break;
             }
         }, function (error) {

@@ -11,8 +11,6 @@ let modalBody = $("#modalBody")
 let modalFooter = $("#modalFooter")
 const API = "http://localhost:8080"
 
-showHome()
-
 function showHome() {
     let str = `
     <div class="header fixed-top">
@@ -101,7 +99,6 @@ function findAll() {
         type: "GET",
         url: "http://localhost:8080/home",
         success: function (data) {
-            console.log(data);
             display(data.content, true);
         }
     });
