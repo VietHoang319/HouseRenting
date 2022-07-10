@@ -30,4 +30,13 @@ public interface HouseRepository extends JpaRepository<House,Long> {
 
     @Query(value = "select * from house where owner_id = :owner_id",nativeQuery = true)
     Iterable<House> findByOwnerId (@Param("owner_id") int owner_id);
+
+
+    @Query(value =
+            "select * from house join orderr o on house.id = o.house_id" +
+            "        and (address =:address and (price between :start and :end))" +
+            "        and (bathroom=:bathroom and bedroom=:bedroom)" +
+            "        and status = 1" +
+            "        and (select not(:cus_begin<=o.start_time and o.start_time<=:cus_end or :cus_begin<=o.end_time and o.end_time<=:cus_end));",nativeQuery = true)
+    Iterable<House>findByAllThing(@Param("address")String address,@Param("start") int start,@Param("end")int end,@Param("bathroom") int bathroom,@Param("bedroom") int bedroom);
 }
