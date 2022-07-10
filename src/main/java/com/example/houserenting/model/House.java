@@ -1,6 +1,8 @@
 package com.example.houserenting.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.util.Locale;
 
@@ -9,15 +11,20 @@ public class House {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
-
+    @NotBlank(message = "Không được để trống tên")
     private String name;
     @ManyToOne
     private Category category;
+    @NotBlank(message = "Không được để trống địa chỉ")
     private String address;
-
+    @Max(value = 10, message = "Nhập nhiều nhất 10 phòng ngủ")
+    @Min(value = 1, message = "Nhập ít nhất 1 phòng ngủ")
     private int bedroom;
+    @Max(value = 3, message = "Nhập nhiều nhất 3 phòng tăm")
+    @Min(value = 1, message = "Nhập ít nhất 1 phòng tắm")
     private int bathroom;
     private String description;
+    @Min(value = 1, message = "Giá thấp nhất là 1")
     private int price;
     @ManyToOne
     private User owner;

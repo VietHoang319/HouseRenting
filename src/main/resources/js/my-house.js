@@ -21,28 +21,34 @@ function showAddForm() {
     modal.modal('show');
     let strBody = `<div id="addForm">
                      <label style="color: black"> Tên: </label>
-                    <input type="text" name="name" class="form-control" id="nameA">
+                    <input type="text" name="name" class="form-control" id="nameA" placeholder="Nhập tên căn nhà">
+                    <p style="color: red" id="errorName"></p>
                     <label style="color: black"> Địa chỉ: </label>
-                    <input type="text" name="address" class="form-control" id="addressA">
+                    <input type="text" name="address" class="form-control" id="addressA" placeholder="Nhập địa chỉ">
+                    <p style="color: red" id="errorAddress"></p>
                     <label style="color: black"> Số phòng ngủ: </label>
-                    <input type="number" name="bedroom" class="form-control" id="bedroomA">
+                    <input type="number" min="1" max="10" name="bedroom" class="form-control" id="bedroomA">
+                    <p style="color: red" id="errorBedroom"></p>
                     <label style="color: black"> Số phòng tắm: </label>
-                    <input type="number" name="bathroom" class="form-control" id="bathroomA">
-                    <label style="color: black"> Giá sếp Hoàng mong muốn: </label>
-                    <input type="number" name="price" class="form-control" id="priceA">
+                    <input type="number" min="1" max="3" name="bathroom" class="form-control" id="bathroomA">
+                    <p style="color: red" id="errorBathroom"></p>
+                    <label style="color: black"> Giá thuê: </label>
+                    <input type="number" min="1" name="price" class="form-control" id="priceA" placeholder="Nhập giá thuê">
+                    <p style="color: red" id="errorPrice"></p>
                     <label style="color: black"> Mô tả: </label>
-                    <input type="text" name="description" class="form-control" id="descriptionA">
+                    <input type="text" name="description" class="form-control" id="descriptionA" placeholder="Nhập mô tả chung">
                     <label style="color: black"> Loại phòng: </label>
                     <select id="categoryId" name="categoryId" class="form-control">
 
                     </select>
                     <label style="color: black"> Chọn ảnh: </label>
                     <input id="fileButton" type="file" value="upload" accept=".jpg;.jpeg; gif" onchange="upload1(event)">
+                    <p style="color: red" id="errorImage"></p>
                 </div>`
     modalBody.html(strBody)
     let categorySelect = document.getElementById('categoryId');
     let strFooter = `<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="save()" >Lưu</button>`
+                <button type="button" class="btn btn-primary" onclick="save()" >Lưu</button>`
     modalFooter.html(strFooter)
     $.ajax({
         type: "GET",
@@ -67,10 +73,24 @@ function save() {
     let description = $("#descriptionA");
     let category = $("#categoryId");
 
+    let errorName = $("#errorName")
+    let errorAddress = $("#errorAddress")
+    let errorBedroom = $("#errorBedroom")
+    let errorBathroom = $("#errorBathroom")
+    let errorPrice = $("#errorPrice")
+    let errorImage = $("#errorImage")
+
+    errorName.text("")
+    errorAddress.text("")
+    errorBathroom.text("")
+    errorBedroom.text("")
+    errorPrice.text("")
+    errorImage.text("")
+
     let house = {
         name: name.val(),
         address: address.val(),
-        bedroom: bathroom.val(),
+        bedroom: bedroom.val(),
         bathroom: bathroom.val(),
         price: price.val(),
         description: description.val(),
@@ -83,40 +103,54 @@ function save() {
         }
     }
 
-    $.ajax({
-        headers: {
-            Authorization: 'Bearer ' + token,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        type: "POST",
-        url: "http://localhost:8080/houses",
-        data: JSON.stringify(house),
-        success: function (data) {
-            let imageUpLoad = {
-                image: localStorage.getItem(storageKeyImg),
-                house: {
-                    id: data.id
+    if(localStorage.getItem("img") !== "") {
+        $.ajax({
+            headers: {
+                Authorization: 'Bearer ' + token,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: "POST",
+            url: "http://localhost:8080/houses",
+            data: JSON.stringify(house),
+            success: function (data) {
+                let imageUpLoad = {
+                    image: localStorage.getItem(storageKeyImg),
+                    house: {
+                        id: data.id
+                    }
+                }
+                $.ajax({
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    type: 'Post',
+                    url: "http://localhost:8080/images",
+                    data: JSON.stringify(imageUpLoad),
+                    success: function () {
+                        localStorage.setItem("img", "")
+                        modal.modal("hide")
+                        showHouseDetail(data.id)
+                    }
+                })
+            },
+            error: function (error) {
+                console.log(error)
+                errorName.text(error.responseJSON.name)
+                errorAddress.text(error.responseJSON.address)
+                errorBedroom.text(error.responseJSON.bedroom)
+                errorBathroom.text(error.responseJSON.bathroom)
+                errorPrice.text(error.responseJSON.price)
+                if (localStorage.getItem("img") === "") {
+                    errorImage.text("Phải chọn ảnh cho nhà")
                 }
             }
-            $.ajax({
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                type: 'Post',
-                url: "http://localhost:8080/images",
-                data: JSON.stringify(imageUpLoad),
-                success: function () {
-                    localStorage.setItem(storageKeyImg, "")
-                    showHouseDetail(data.id)
-                }
-            })
-        },
-        error: function (error) {
-            console.log(error)
-        }
-    })
+        })
+    }
+    else {
+        errorImage.text("Phải chọn ảnh cho nhà")
+    }
 }
 
 function findAllMyHouse() {
@@ -138,14 +172,19 @@ function showEditForm(id) {
                     <input type="hidden" id="id">
                     <label style="color: black"> Tên: </label>
                     <input type="text" name="name" class="form-control" id="nameEdit">
+                    <p style="color: red" id="errorName"></p>
                     <label style="color: black"> Địa chỉ: </label>
                     <input type="text" name="address" class="form-control" id="addressEdit">
+                    <p style="color: red" id="errorAddress"></p>
                     <label style="color: black"> Số phòng ngủ: </label>
                     <input type="number" name="bedroom" class="form-control" id="bedroomEdit">
+                    <p style="color: red" id="errorBedroom"></p>
                     <label style="color: black"> Số phòng tắm: </label>
                     <input type="number" name="bathroom" class="form-control" id="bathroomEdit">
+                    <p style="color: red" id="errorBathroom"></p>
                     <label style="color: black"> Giá: </label>
                     <input type="number" name="price" class="form-control" id="priceEdit">
+                    <p style="color: red" id="errorPrice"></p>
                     <label style="color: black"> Mô tả: </label>
                     <input type="text" name="description" class="form-control" id="descriptionEdit">
                     <label style="color: black"> Phân loại: </label>
@@ -160,7 +199,7 @@ function showEditForm(id) {
                     </select>`
     modalBody.html(strBody)
     strFooter = `<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" onclick="update()">Lưu</button>`
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" onclick="showEditNotification()">Lưu</button>`
     modalFooter.html(strFooter)
 
     let categorySelect = document.getElementById('categoryIdEdit');
@@ -199,6 +238,10 @@ function showEditForm(id) {
     });
 }
 
+function showEditNotification() {
+    $("#exampleModa1").modal("show")
+}
+
 function update() {
     let id = document.getElementById('id').value;
     let name = document.getElementById('nameEdit').value;
@@ -209,6 +252,19 @@ function update() {
     let description = document.getElementById('descriptionEdit').value;
     let categoryId = document.getElementById('categoryIdEdit').value;
     let status = document.getElementById('statusEdit').value;
+
+    let errorName = $("#errorName")
+    let errorAddress = $("#errorAddress")
+    let errorBedroom = $("#errorBedroom")
+    let errorBathroom = $("#errorBathroom")
+    let errorPrice = $("#errorPrice")
+
+    errorName.text("")
+    errorAddress.text("")
+    errorBathroom.text("")
+    errorBedroom.text("")
+    errorPrice.text("")
+
 
     let house = {
         id: id,
@@ -238,13 +294,27 @@ function update() {
         data: JSON.stringify(house),
         success: function () {
             modal.modal("hide")
+            $("#exampleModa1").modal("hide")
             showHouseDetail(id)
             // showMyHouse()
         },
         error: function (error) {
             console.log(error)
+            errorName.text(error.responseJSON.name)
+            errorAddress.text(error.responseJSON.address)
+            errorBedroom.text(error.responseJSON.bedroom)
+            errorBathroom.text(error.responseJSON.bathroom)
+            errorPrice.text(error.responseJSON.price)
         }
     })
+}
+
+function showDeleteForm(id) {
+    let strBody = `<p>Bạn có chắn chắn muốn xóa nhà ngày không</p>`
+    modalBody.html(strBody)
+    let strFooter = `<button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+                     <button type="button" class="btn btn-primary" onclick="deleteHouse(${id})">Chắc chắn</button>`
+    modalFooter.html(strFooter)
 }
 
 function deleteHouse(id){
@@ -257,6 +327,7 @@ function deleteHouse(id){
         type: "DELETE",
         url: "http://localhost:8080/houses/" + id,
         success: function () {
+            modal.modal("hide")
             showMyHouse()
         },
         error: function (error) {

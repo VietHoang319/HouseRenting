@@ -6,6 +6,7 @@ var fbBucketName = 'images';
 // get elements
 var fileButton = document.getElementById('fileButton');
 let storageKeyImg = 'img';
+localStorage.setItem("img", "")
 // listen for file selection
 function upload(e, id) {
 

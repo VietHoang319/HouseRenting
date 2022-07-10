@@ -141,10 +141,13 @@ public class UserController {
     @ExceptionHandler({ ConstraintViolationException.class })
     public ResponseEntity<Object> handleConstraintViolation(
             ConstraintViolationException ex, WebRequest request) {
-        List<String> errors = new ArrayList<String>();
+//        List<String> errors = new ArrayList<String>();
+        Map<String, String> errors = new HashMap<>();
         for (ConstraintViolation<?> violation : ex.getConstraintViolations()) {
-            errors.add(violation.getRootBeanClass().getName() + " " +
-                    violation.getPropertyPath() + ": " + violation.getMessage());
+//            errors.add(violation.getRootBeanClass().getName() + " " +
+//                    violation.getPropertyPath() + ": " + violation.getMessage());
+            String path = String.valueOf(violation.getPropertyPath());
+            errors.put(path.replace("createUser.user.", ""), violation.getMessage());
         }
 
         ApiError apiError =

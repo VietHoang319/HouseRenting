@@ -4,25 +4,18 @@ import org.springframework.http.HttpStatus;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class ApiError {
 
     private HttpStatus status;
     private String message;
-    private List<String> errors;
+    Map<String, String> errors;
 
-    public ApiError(HttpStatus status, String message, List<String> errors) {
-        super();
+    public ApiError(HttpStatus status, String message, Map<String, String> errors) {
         this.status = status;
         this.message = message;
         this.errors = errors;
-    }
-
-    public ApiError(HttpStatus status, String message, String error) {
-        super();
-        this.status = status;
-        this.message = message;
-        errors = Arrays.asList(error);
     }
 
     public HttpStatus getStatus() {
@@ -41,11 +34,11 @@ public class ApiError {
         this.message = message;
     }
 
-    public List<String> getErrors() {
+    public Map<String, String> getErrors() {
         return errors;
     }
 
-    public void setErrors(List<String> errors) {
+    public void setErrors(Map<String, String> errors) {
         this.errors = errors;
     }
 }
