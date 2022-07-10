@@ -226,7 +226,6 @@ function update() {
             id: localStorage.getItem("id")
         }
     }
-    console.log(house);
 
     $.ajax({
         type: "PUT",
@@ -241,6 +240,24 @@ function update() {
             modal.modal("hide")
             showHouseDetail(id)
             // showMyHouse()
+        },
+        error: function (error) {
+            console.log(error)
+        }
+    })
+}
+
+function deleteHouse(id){
+    $.ajax({
+        headers: {
+            Authorization: 'Bearer ' + token,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        type: "DELETE",
+        url: "http://localhost:8080/houses/" + id,
+        success: function () {
+            showMyHouse()
         },
         error: function (error) {
             console.log(error)
