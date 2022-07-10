@@ -15,7 +15,7 @@ function showHouseDetail(id) {
                                 <div class="input-file-container btn-crud btn-nav">
 <!--                                    <label tabindex="0" for="my-file" class="input-file-trigger ">Thêm ảnh</label>-->
                                     <span  class="input-file-trigger">Thêm ảnh</span>
-                                    <input class="input-file" id="fileButton" type="file"  value="upload" accept=".jpg" id="fileButton" onchange="upload(event)">
+                                    <input class="input-file" id="fileButton" type="file"  value="upload" accept=".jpg"  onchange="upload(event, ${id})">
                                 </div>
                                 <button class="btn-nav btn-crud">Sửa thông tin</button>
                                 <button class="btn-nav btn-crud">Xóa nhà đã đăng</button>

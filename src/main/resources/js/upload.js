@@ -4,11 +4,10 @@ var image = '';
 // ALSO CHECK STORAGE RULES IN FIREBASE CONSOLE
 var fbBucketName = 'images';
 // get elements
-var uploader = document.getElementById('uploader');
 var fileButton = document.getElementById('fileButton');
 let storageKeyImg = 'img';
 // listen for file selection
-function upload(e) {
+function upload(e, id) {
 
     // what happened
     console.log('file upload event', e);
@@ -28,10 +27,9 @@ function upload(e) {
     // update progress bar
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
         function (snapshot) {
+        console.log(snapshot)
             // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            uploader.value = progress;
-            console.log('Upload is ' + progress + '% done');
+            // console.log('Upload is ' + progress + '% done');
             switch (snapshot.state) {
                 case firebase.storage.TaskState.PAUSED: // or 'paused'
                     console.log('Upload is paused');
@@ -62,11 +60,29 @@ function upload(e) {
             // save this link somewhere, e.g. put it in an input field
             let downloadURL = uploadTask.snapshot.downloadURL;
             localStorage.setItem(storageKeyImg , downloadURL)
-            alert(downloadURL)
-            let divLocation = document.getElementById("imgDiv");
-            let imgElement = document.createElement("img");
-            imgElement.src = downloadURL
-            console.log('pic ==', image)
-            divLocation.append(imgElement);
+            let imageUpLoad = {
+                image: localStorage.getItem(storageKeyImg),
+                house: {
+                    id: id
+                }
+            }
+            // alert(downloadURL)
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                type: 'Post',
+                url: "http://localhost:8080/images",
+                data: JSON.stringify(imageUpLoad),
+                success: function () {
+                    getHouse(id)
+                }
+            })
+            // let divLocation = document.getElementById("imgDiv");
+            // let imgElement = document.createElement("img");
+            // imgElement.src = downloadURL
+            // console.log('pic ==', image)
+            // divLocation.append(imgElement);
         });
 }

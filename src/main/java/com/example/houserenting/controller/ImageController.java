@@ -28,7 +28,7 @@ public class ImageController {
     }
 
     @PostMapping
-    public ResponseEntity<Image> save(Image image) {
+    public ResponseEntity<Image> save(@RequestBody Image image) {
         imageService.save(image);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
