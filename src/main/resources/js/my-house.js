@@ -35,6 +35,8 @@ function showAddForm() {
                     <select id="categoryId" name="categoryId" class="form-control">
 
                     </select>
+                    <label style="color: black"> Chọn ảnh: </label>
+                    <input id="fileButton" type="file" value="upload" accept=".jpg;.jpeg; gif"  onchange="upload1(event)">
                 </div>`
     modalBody.html(strBody)
     let strFooter = `<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
@@ -99,7 +101,6 @@ function save() {
             category : {
                 id : category.val("")
             }
-
             showMyHouse()
         },
         error: function (error) {
