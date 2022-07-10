@@ -17,7 +17,7 @@ function showHouseDetail(id) {
                                     <span  class="input-file-trigger">Thêm ảnh</span>
                                     <input class="input-file" id="fileButton" type="file"  value="upload" accept=".jpg"  onchange="upload(event, ${id})">
                                 </div>
-                                <button class="btn-nav btn-crud" data-toggle="modal" data-target="#exampleModal1" onclick="showEditForm(${id})" >Sửa thông tin</button>                            
+                                <button class="btn-nav btn-crud" data-toggle="modal" data-target="#exampleModal" onclick="showEditForm(${id})">Sửa thông tin</button>                            
                                 <button class="btn-nav btn-crud">Xóa nhà đã đăng</button>
                             </div>
                         </div>

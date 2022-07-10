@@ -134,6 +134,35 @@ function findAllMyHouse() {
 }
 
 function showEditForm(id) {
+    strBody = `<div id="editForm">
+                    <input type="hidden" id="id">
+                    <label style="color: black"> Tên: </label>
+                    <input type="text" name="name" class="form-control" id="nameEdit">
+                    <label style="color: black"> Địa chỉ: </label>
+                    <input type="text" name="address" class="form-control" id="addressEdit">
+                    <label style="color: black"> Số phòng ngủ: </label>
+                    <input type="number" name="bedroom" class="form-control" id="bedroomEdit">
+                    <label style="color: black"> Số phòng tắm: </label>
+                    <input type="number" name="bathroom" class="form-control" id="bathroomEdit">
+                    <label style="color: black"> Giá: </label>
+                    <input type="number" name="price" class="form-control" id="priceEdit">
+                    <label style="color: black"> Mô tả: </label>
+                    <input type="text" name="description" class="form-control" id="descriptionEdit">
+                    <label style="color: black"> Phân loại: </label>
+                    <select id="categoryIdEdit" name="categoryId" class="form-control" >
+                    </select>
+
+                    <label style="color: black"> Trạng thái nhà: </label>
+                    <select id="statusEdit" name="statusEdit" class="form-control" >
+                        <option value="1">Trống</option>
+                        <option value="2">Đã có người thuê</option>
+                        <option value="3">Đang nâng cấp</option>
+                    </select>`
+    modalBody.html(strBody)
+    strFooter = `<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" onclick="update()">Lưu</button>`
+    modalFooter.html(strFooter)
+
     let categorySelect = document.getElementById('categoryIdEdit');
     $.ajax({
         type: "GET",
@@ -199,7 +228,6 @@ function update() {
     }
     console.log(house);
 
-
     $.ajax({
         type: "PUT",
         headers: {
@@ -210,17 +238,9 @@ function update() {
         url: "http://localhost:8080/houses/" + id,
         data: JSON.stringify(house),
         success: function () {
-            // name.val("")
-            // address.val("")
-            // bedroom.val("")
-            // bathroom.val("")
-            // price.val("")
-            // description.val("")
-            // category : {
-            //     id : category.val("")
-            // }
-
-            showMyHouse()
+            modal.modal("hide")
+            showHouseDetail(id)
+            // showMyHouse()
         },
         error: function (error) {
             console.log(error)
