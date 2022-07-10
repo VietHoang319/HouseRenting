@@ -26,13 +26,21 @@ public class HomeController {
     }
 
     @GetMapping("/find-by-bedroom")
-    public ResponseEntity<Page<House>> findHouseByBedroom(@RequestParam(value = "bedroom") int bedroom, @PageableDefault(value = 2) Pageable pageable) {
+    public ResponseEntity<Page<House>> findHouseByBedroom(@RequestParam(value = "bedroom") int bedroom, @PageableDefault(value = 9) Pageable pageable) {
         Page<House> houses = houseService.findAllByBedroom(bedroom, pageable);
         return new ResponseEntity<>(houses, HttpStatus.OK);
     }
 
+    @GetMapping("/find-by-category")
+    public ResponseEntity<Page<House>> findHouseByCategory(@RequestParam(value = "category_id") int category, @PageableDefault(value = 9) Pageable pageable) {
+        Page<House> houses = houseService.findByCategory(category, pageable);
+        return new ResponseEntity<>(houses, HttpStatus.OK);
+    }
+
+
+
     @GetMapping("/find-by-bathroom")
-    public ResponseEntity<Page<House>> findHouseByBathroom(@RequestParam(value = "bathroom") int bathroom, @PageableDefault(value = 2) Pageable pageable) {
+    public ResponseEntity<Page<House>> findHouseByBathroom(@RequestParam(value = "bathroom") int bathroom, @PageableDefault(value = 9) Pageable pageable) {
         Page<House> houses = houseService.findAllByBathroom(bathroom, pageable);
         return new ResponseEntity<>(houses, HttpStatus.OK);
     }

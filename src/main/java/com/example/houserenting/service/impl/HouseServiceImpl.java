@@ -56,6 +56,11 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
+    public Page<House> findByCategory(int category, Pageable pageable) {
+        return houseRepository.findByCategory(category,pageable);
+    }
+
+    @Override
     public Page<House> findAllByBathroomAndBedroom(int bathroom, int bedroom, Pageable pageable) {
         return houseRepository.findAllByBathroomAndBedroom(bathroom,bedroom,pageable);
     }

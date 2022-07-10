@@ -12,10 +12,11 @@ function findAllCategory() {
         }//lay noi dung cua câtegorylist
     })
 }
-function searchByCategoryId(id) {
+
+function searchByCategoryId(category_id) {
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/categories/"+id,
+        url: "http://localhost:8080/home/find-by-category?category_id=" + category_id,
         success: function (data) {
             let content1 = $("#content1")
             let str = `<div class="row" id="list">
