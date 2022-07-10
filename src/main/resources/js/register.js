@@ -3,12 +3,13 @@ function showRegister() {
         <div class="col-12 navdiv">
             <!--            navbar-->
             <nav class="navbar navbar-expand-lg navbar-light" id="navbar">
-                <b><a class="navbar-brand" href="#" id="logo" onclick="showRegister()">Sparrow</a></b>
+                <b><a class="navbar-brand" href="#" id="logo" onclick="showRegister()">dinhcaothuenha.com</a></b>
+<!--                Sparrow-->
             </nav>
         </div>
     </div>
     <div id="login-div">
-        <h3 >Đăng ký</h3>
+        <h3 >Đăng ký ngay lập tức đi</h3>
         <label for="username">Tên đăng nhập</label>
         <input type="text" placeholder="Nhập tên đăng nhập" id="username">
         <label for="password">Mật khẩu</label>

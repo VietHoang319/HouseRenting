@@ -1,4 +1,5 @@
-let categorySelect = document.getElementById('categoryId');;
+let addForm = document.getElementById('addForm');
+let role;
 
 function showMyHouse() {
     let content0 = $("#content0")
@@ -31,7 +32,7 @@ function showAddForm() {
                     <input type="number" name="price" class="form-control" id="priceA">
                     <label style="color: black"> Mô tả: </label>
                     <input type="text" name="description" class="form-control" id="descriptionA">
-                    <label style="color: black"> Phân loại: </label>
+                    <label style="color: black"> Loại phòng: </label>
                     <select id="categoryId" name="categoryId" class="form-control">
 
                     </select>
@@ -39,6 +40,7 @@ function showAddForm() {
                     <input id="fileButton" type="file" value="upload" accept=".jpg;.jpeg; gif"  onchange="upload1(event)">
                 </div>`
     modalBody.html(strBody)
+    let categorySelect = document.getElementById('categoryId');
     let strFooter = `<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="save()" >Lưu</button>`
     modalFooter.html(strFooter)
@@ -46,9 +48,9 @@ function showAddForm() {
         type: "GET",
         url: "http://localhost:8080/categories",
         success: function (data) {
+            console.log(data)
             let str = "";
             for (let i=0; i<data.length; i++) {
-                console.log(data)
                 str += `<option value="${data[i].id}"> ${data[i].name}</option>`
             }
             categorySelect.innerHTML = str;
@@ -122,4 +124,100 @@ function findAllMyHouse() {
             display(data, false);
         }
     });
+}
+
+function showEditForm(id){
+    let categorySelect = document.getElementById('categoryIdEdit');
+    $.ajax({
+        type: "GET",
+        headers:{
+            Authorization: 'Bearer ' + localStorage.getItem('token'),
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        url: "http://localhost:8080/home/house/"+id,
+        success: function (data) {
+            console.log(data)
+            document.getElementById('id').value = data.id;
+            document.getElementById('nameEdit').value = data.name;
+            document.getElementById('addressEdit').value = data.address;
+            document.getElementById('bedroomEdit').value = data.bedroom;
+            document.getElementById('bathroomEdit').value = data.bathroom;
+            document.getElementById('priceEdit').value = data.price;
+            document.getElementById('descriptionEdit').value = data.description;
+            document.getElementById("categoryIdEdit").value = data.category.id;
+            document.getElementById("statusEdit").value = data.status;
+        }
+    });
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/categories",
+        success: function (data) {
+            console.log(data)
+            let str = "";
+            for (let i=0; i<data.length; i++) {
+                str += `<option value="${data[i].id}"> ${data[i].name}</option>`
+            }
+            categorySelect.innerHTML = str;
+        }
+    });
+}
+
+function update() {
+    let id = document.getElementById('id').value;
+    let name = document.getElementById('nameEdit').value;
+    let address = document.getElementById('addressEdit').value;
+    let bedroom = document.getElementById('bedroomEdit').value;
+    let bathroom = document.getElementById('bathroomEdit').value;
+    let price = document.getElementById('priceEdit').value;
+    let description = document.getElementById('descriptionEdit').value;
+    let categoryId = document.getElementById('categoryIdEdit').value;
+    let status = document.getElementById('statusEdit').value;
+
+    let house = {
+        id:id,
+        name: name,
+        address:address,
+        bedroom:bedroom,
+        bathroom:bathroom,
+        price:price,
+        description:description,
+        status: status,
+        category : {
+            id : categoryId
+        },
+        owner: {
+            id: localStorage.getItem("id")
+        }
+    }
+    console.log(house);
+
+
+
+    $.ajax({
+        type: "PUT",
+        headers: {
+            Authorization: 'Bearer ' + token,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        url: "http://localhost:8080/houses/" + id,
+        data: JSON.stringify(house),
+        success: function () {
+            // name.val("")
+            // address.val("")
+            // bedroom.val("")
+            // bathroom.val("")
+            // price.val("")
+            // description.val("")
+            // category : {
+            //     id : category.val("")
+            // }
+
+            showMyHouse()
+        },
+        error: function (error) {
+            console.log(error)
+        }
+    })
 }

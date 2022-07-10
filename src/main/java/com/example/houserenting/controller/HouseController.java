@@ -29,7 +29,7 @@ public class HouseController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<House> updateProduct(@PathVariable Long id, @RequestBody House house) {
+    public ResponseEntity<House> updateHouse(@PathVariable Long id, @RequestBody House house) {
         Optional<House> houseOptional = houseService.findById(id);
         if (!houseOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
