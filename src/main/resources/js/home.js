@@ -116,7 +116,7 @@ function display(data, flag) {
             else {
                 str += `<div class="card" style="width: 18rem;" onclick="showHouseDetail(${data[i].id})">`
             }
-            str += `<img class="image-card" id="imageCard" class="card-img-top" alt="...">
+            str += `<img class="image-card" id="imageCard" class="card-img-top" style="width: 100%; height: 200px" alt="...">
                       <div class="card-body">
                         <h3 class="card-title">${data[i].name}</h3>
                         <p><i class="fa-solid fa-location-dot"></i> ${data[i].address}</p>
