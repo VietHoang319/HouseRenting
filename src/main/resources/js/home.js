@@ -172,10 +172,10 @@ function showSearchForm() {
     let strBody = `<label style="color: black"> Nhập địa chỉ</label>
                     <input type="text" name="name" class="form-control" id="address" placeholder="Nhập địa chỉ cần tìm">
                     <label style="color: black"> Số phòng ngủ</label>
-                    <input type="range" min="1" max="10" id="bathroom" value="1">
+                    <input type="range" min="1" max="10" id="bedroom" value="1" oninput="changValBedroom()">
                     <p style="text-align: center" id="bedroomVal">1</p>
                     <label style="color: black"> Số phòng tắm</label>
-                    <input type="range" min="1" max="5" id="bedroom" value="1">
+                    <input type="range" min="1" max="3" id="bathroom" value="1" oninput="changValBathroom()">
                     <p style="text-align: center" id="bathroomVal">1</p>
                     <label style="color: black"> Nhập khoảng tiền</label>
                     <div class="row">
@@ -204,6 +204,14 @@ function showSearchForm() {
     modalBody.html(strBody)
     let strFooter = `<button type="button" class="btn btn-primary" onclick="searchByAll()">Tìm kiếm</button>`
     modalFooter.html(strFooter)
+}
+
+function changValBedroom() {
+    document.getElementById("bedroomVal").innerText = document.getElementById("bedroom").value
+}
+
+function changValBathroom() {
+    document.getElementById("bathroomVal").innerText = document.getElementById("bathroom").value
 }
 
 function searchByAll() {

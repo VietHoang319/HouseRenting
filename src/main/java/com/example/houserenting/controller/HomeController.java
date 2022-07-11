@@ -66,7 +66,7 @@ public class HomeController {
             cus_begin = "1900-01-01";
             cus_end = String.valueOf(LocalDate.now());
         }
-        Iterable<House> houses = houseService.findByAll(address, start, end, bathroom, bedroom, LocalDate.parse(cus_begin), LocalDate.parse(cus_end));
+        Iterable<House> houses = houseService.findByAll("%" + address + "%", start, end, bathroom, bedroom, LocalDate.parse(cus_begin), LocalDate.parse(cus_end));
         return new ResponseEntity<>(houses, HttpStatus.OK);
     }
 }
