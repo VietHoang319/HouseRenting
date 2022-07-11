@@ -52,6 +52,8 @@ function showHome() {
     <br>
     <br>
     <div class="container">
+        <div class="row">
+        </div>
         <div class="row" id="content0">
             <!--        dropdown-->
             <div class="col-2">
@@ -78,12 +80,9 @@ function showHome() {
                 </div>
                 
                 <div class="list-group panel">
-                  <button onclick="findtop()">Top 2 nhà được thuê nhiều nhất</button>
+                  <button onclick="findtop()">Top 5 nhà được thuê nhiều nhất</button>
 
                 </div>
-                
-                
-                
                 
               </div>
             </div>
@@ -101,6 +100,7 @@ function showHome() {
     findAllCategory()
     findAllBedroom()
     findAllBathroom()
+    showCarouselTop()
 }
 
 function findAll() {
@@ -113,22 +113,26 @@ function findAll() {
     });
 }
 
-
 function findtop() {
     $.ajax({
         type: "GET",
         url: "http://localhost:8080/houses/by-price-top2",
         success: function (data) {
-            display(data);
+            console.log(data)
+            let content1 = $("#content1")
+            let str = `<div class="row" id="list">
+
+                    </div>`
+            content1.html(str)
+            display(data, true);
         }
     });
 }
 
-
 function display(data, flag) {
     let tbody = document.getElementById("list")
     let str = "";
-    
+
     for (let i = 0; i < data.length; i++) {
         str += `<div class="col-4 mt-4 content">`
             if (flag == true) {
@@ -137,7 +141,7 @@ function display(data, flag) {
             else {
                 str += `<div class="card" style="width: 18rem;" onclick="showHouseDetail(${data[i].id})">`
             }
-            str += `<img class="image-card" id="imageCard" class="card-img-top" style="width: 100%; height: 200px" alt="...">
+            str += `<img class="image-card" id="imageCard${i}" class="card-img-top" style="width: 100%; height: 200px" alt="...">
                       <div class="card-body">
                         <h3 class="card-title">${data[i].name}</h3>
                         <p><i class="fa-solid fa-location-dot"></i> ${data[i].address}</p>
@@ -147,17 +151,18 @@ function display(data, flag) {
                       </div>
                     </div>
                 </div>`
-        getImageById(data[i].id)
+        getImageById(data[i].id, `imageCard${i}`)
     }
     tbody.innerHTML = str;
 }
 
-function getImageById(id) {
+function getImageById(id, idCard) {
     $.ajax({
         type: 'GET',
         url: "http://localhost:8080/images/house/" + id,
         success: function (data) {
-            document.getElementById("imageCard").src = data.image
+            console.log(data)
+            document.getElementById(idCard).src = data.image
         }
     })
 }

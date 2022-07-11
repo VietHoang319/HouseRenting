@@ -30,13 +30,15 @@ public interface HouseRepository extends JpaRepository<House,Long> {
     @Query(value = "select * from house where bathroom = :bathroom and status=1",nativeQuery = true)
     Page<House> findByBathroom (@Param("bathroom") int bathroom, Pageable pageable);
 
-    @Query(value = "select house.id, name, address, bedroom, bathroom, description, price, owner_id, category_id, status  from house\n" +
+    @Query(value = "select house.id, name, address, bedroom, bathroom, description, price, owner_id, category_id, status from house\n" +
             "join\n" +
             "(select house_id, count(house_id) as dem\n" +
             "from orderr\n" +
+            "join house h on orderr.house_id = h.id\n" +
+            "where h.status <> 0\n" +
             "group by house_id\n" +
             "order by dem desc\n" +
-            "limit 2) as abc on abc.house_id = house.id",nativeQuery = true)
+            "limit 5) as abc on abc.house_id = house.id;",nativeQuery = true)
     Iterable<House> findTop2();
 
 
