@@ -10,6 +10,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 @Repository
 public interface HouseRepository extends JpaRepository<House,Long> {
     @Query(value = "select * from house where status = 1",nativeQuery = true)
@@ -18,11 +21,8 @@ public interface HouseRepository extends JpaRepository<House,Long> {
 
     Page<House> findAllByCategory_Id(Long id, Pageable pageable);
 
-
     @Query(value = "select * from house where category_id = :category_id and status=1",nativeQuery = true)
     Page<House> findByCategory (@Param("category_id") int category, Pageable pageable);
-
-
 
     @Query(value = "select * from house where bedroom = :bedroom and status=1",nativeQuery = true)
     Page<House> findByBedRoom (@Param("bedroom") int bedroom, Pageable pageable);
@@ -34,11 +34,20 @@ public interface HouseRepository extends JpaRepository<House,Long> {
     @Query (value = "select * from house where (bathroom = :bathroom and bedroom = :bedroom)",nativeQuery = true )
     Page<House> findAllByBathroomAndBedroom (@Param("bathroom") int bathroom,@Param("bedroom") int bedroom,Pageable pageable);
 
-
-
     @Query(value = "select * from house where owner_id = :owner_id and status >= 1",nativeQuery = true)
     Iterable<House> findByOwnerId(@Param("owner_id") Long owner_id);
 
     @Query(value = "select * from house order by id desc limit 1", nativeQuery = true)
     House findLastHouse();
+
+    @Query(value =
+           "select * from house where\n" +
+                   "address like :address and (price between :start and :end) and bathroom=:bathroom and bedroom=:bedroom and status = 1\n" +
+                   "UNION\n" +
+                   "select h.id , address ,bathroom,bedroom,description,name,price ,h.status,category_id,owner_id\n" +
+                   "from house h join orderr o on h.id = o.house_id\n" +
+                   "where\n" +
+                   "        address like :address and (price between :start and :end) and bathroom=:bathroom and bedroom=:bedroom and h.status = 1\n" +
+                   "and h.id not in (select h.id from house h join orderr o on h.id = o.house_id where :cusBegin<=o.start_time and o.start_time<=:cus_end or :cusBegin<=o.end_time and o.end_time<=:cus_end)\n",nativeQuery = true)
+    Iterable<House>findByAllThing(@Param("address")String address, @Param("start") int start, @Param("end")int end, @Param("bathroom") int bathroom, @Param("bedroom") int bedroom, @Param("cusBegin") LocalDate cusBegin,@Param("cus_end") LocalDate cus_end);
 }
