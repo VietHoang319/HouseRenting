@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
+
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/home")
@@ -52,5 +56,17 @@ public class HomeController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(houseOptional.get(), HttpStatus.OK);
+    }
+
+    @GetMapping("/search-by-all")
+    public ResponseEntity<Iterable<House>> findByAll(@RequestParam(value = "address") String address, @RequestParam(value = "start") int start, @RequestParam(value = "end") int end,
+                                                     @RequestParam(value = "bathroom") int bathroom, @RequestParam("bedroom") int bedroom,
+                                                     @RequestParam("cus_begin") String cus_begin, @RequestParam("cus_end") String cus_end) {
+        if ((cus_begin.equals("") && cus_end.equals(""))) {
+            cus_begin = "1900-01-01";
+            cus_end = String.valueOf(LocalDate.now());
+        }
+        Iterable<House> houses = houseService.findByAll(address, start, end, bathroom, bedroom, LocalDate.parse(cus_begin), LocalDate.parse(cus_end));
+        return new ResponseEntity<>(houses, HttpStatus.OK);
     }
 }
