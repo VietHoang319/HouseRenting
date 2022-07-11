@@ -41,9 +41,13 @@ public interface HouseRepository extends JpaRepository<House,Long> {
     House findLastHouse();
 
     @Query(value =
-           " select * from house where"+
-           " (address =:address and (price between :start and :end))"+"and (bathroom=:bathroom and bedroom=:bedroom)"+ "and status = 1"+ " UNION"+
-           " select h.id , address ,bathroom,bedroom,description,name,price ,status,category_id,owner_id"+ " from house h join orderr o on h.id = o.house_id"+
-    "where not(:cus_begin<=o.start_time and o.start_time<=:cus_end or :cus_begin<=o.end_time and o.end_time<=:cus_end)",nativeQuery = true)
-    Iterable<House>findByAllThing(@Param("address")String address, @Param("start") int start, @Param("end")int end, @Param("bathroom") int bathroom, @Param("bedroom") int bedroom, @Param("cus_begin") LocalDate cus_begin,@Param("cus_end") LocalDate cus_end);
+           "select * from house where\n" +
+                   "address like :address and (price between :start and :end) and bathroom=:bathroom and bedroom=:bedroom and status = 1\n" +
+                   "UNION\n" +
+                   "select h.id , address ,bathroom,bedroom,description,name,price ,h.status,category_id,owner_id\n" +
+                   "from house h join orderr o on h.id = o.house_id\n" +
+                   "where\n" +
+                   "        address like :address and (price between :start and :end) and bathroom=:bathroom and bedroom=:bedroom and h.status = 1\n" +
+                   "and h.id not in (select h.id from house h join orderr o on h.id = o.house_id where :cusBegin<=o.start_time and o.start_time<=:cus_end or :cusBegin<=o.end_time and o.end_time<=:cus_end)\n",nativeQuery = true)
+    Iterable<House>findByAllThing(@Param("address")String address, @Param("start") int start, @Param("end")int end, @Param("bathroom") int bathroom, @Param("bedroom") int bedroom, @Param("cusBegin") LocalDate cusBegin,@Param("cus_end") LocalDate cus_end);
 }
