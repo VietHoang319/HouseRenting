@@ -21,9 +21,9 @@ function showHouseDetail(id) {
                                 <button class="btn-nav btn-crud" data-toggle="modal" data-target="#exampleModal" onclick="showDeleteForm(${id})">Xóa nhà đã đăng</button>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" id="carousel">
+                        <div class="row" style="text-align: center">
+                            <div class="col-12 ">
+                                <div id="carouselExampleIndicators" class="carousel slide " data-ride="carousel" id="carousel">
                                     <ol class="carousel-indicators" id="carouselIndicators">
                                         
                                     </ol>

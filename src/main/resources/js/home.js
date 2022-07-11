@@ -29,7 +29,7 @@ function showHome() {
                             
                         </li>
                     </ul>
-                    <button class="btn-nav btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>`
+                    <button class="btn-nav btn-search" onclick="showSearchForm()"><i class="fa-solid fa-magnifying-glass"></i></button>`
         if(token === "") {
             str += `<button class="btn-nav" onclick="showLogin()">Đăng nhập</button>
                     <button class="btn-nav" onclick="showRegister()">Đăng ký</button>`
@@ -142,5 +142,63 @@ function getImageById(id) {
 }
 
 function showSearchForm() {
-    
+    modal.modal("show")
+    let strBody = `<label style="color: black"> Nhập địa chỉ</label>
+                    <input type="text" name="name" class="form-control" id="address" placeholder="Nhập địa chỉ cần tìm">
+                    <label style="color: black"> Số phòng ngủ</label>
+                    <input type="range" min="1" max="10" id="bathroom" value="1">
+                    <p style="text-align: center" id="bedroomVal">1</p>
+                    <label style="color: black"> Số phòng tắm</label>
+                    <input type="range" min="1" max="5" id="bedroom" value="1">
+                    <p style="text-align: center" id="bathroomVal">1</p>
+                    <label style="color: black"> Nhập khoảng tiền</label>
+                    <div class="row">
+                        <div class="col-5">
+                            <span><input type="number" min="1" id="startPrice" value="1"></span>
+                        </div>
+                        <div class="col-2">
+                            <span></span>
+                        </div>
+                         <div class="col-5">
+                            <span><input type="number" min="1" id="endPrice" value="10000000"></span>
+                        </div>
+                    </div>
+                    <label style="color: black"> Nhập khoảng ngày</label>
+                    <div class="row">
+                        <div class="col-5">
+                            <span><input type="date" id="dateBegin"></span>
+                        </div>
+                        <div class="col-2">
+                            <span></span>
+                        </div>
+                         <div class="col-5">
+                            <span><input type="date" id="dateEnd"></span>
+                        </div>
+                    </div>`
+    modalBody.html(strBody)
+    let strFooter = `<button type="button" class="btn btn-primary" onclick="searchByAll()">Tìm kiếm</button>`
+    modalFooter.html(strFooter)
+}
+
+function searchByAll() {
+    let address= document.getElementById("address").value;
+    let startPrice= document.getElementById("startPrice").value;
+    let endPrice= document.getElementById("endPrice").value;
+    let bathroom= document.getElementById("bathroom").value;
+    let bedroom= document.getElementById("bedroom").value;
+    let dateBegin= document.getElementById("dateBegin").value;
+    let dateEnd= document.getElementById("dateEnd").value;
+
+    console.log(bathroom)
+    console.log(bedroom)
+
+    $.ajax({
+        type: 'GET',
+        url: "http://localhost:8080/home/search-by-all?address=" + address + "&start=" + startPrice + "&end=" + endPrice + "&bathroom=" + bathroom + "&bedroom=" + bedroom + "&cus_begin=" + dateBegin + "&cus_end=" + dateEnd,
+        success: function (data) {
+            console.log(data)
+            modal.modal("hide")
+            display(data, true)
+        }
+    })
 }

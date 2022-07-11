@@ -3,7 +3,7 @@ function showRegister() {
         <div class="col-12 navdiv">
             <!--            navbar-->
             <nav class="navbar navbar-expand-lg navbar-light" id="navbar">
-                <b><a class="navbar-brand" href="#" id="logo" onclick="showRegister()">dinhcaothuenha.com</a></b>
+                <b><a class="navbar-brand" href="#" id="logo" onclick="showHome()">dinhcaothuenha.com</a></b>
 <!--                Sparrow-->
             </nav>
         </div>
