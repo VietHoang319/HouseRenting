@@ -8,6 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 @Repository
 public interface HouseRepository extends JpaRepository<House,Long> {
     @Query(value = "select * from house where status = 1",nativeQuery = true)
@@ -33,10 +36,9 @@ public interface HouseRepository extends JpaRepository<House,Long> {
 
 
     @Query(value =
-            "select * from house join orderr o on house.id = o.house_id" +
-            "        and (address =:address and (price between :start and :end))" +
-            "        and (bathroom=:bathroom and bedroom=:bedroom)" +
-            "        and status = 1" +
-            "        and (select not(:cus_begin<=o.start_time and o.start_time<=:cus_end or :cus_begin<=o.end_time and o.end_time<=:cus_end));",nativeQuery = true)
-    Iterable<House>findByAllThing(@Param("address")String address,@Param("start") int start,@Param("end")int end,@Param("bathroom") int bathroom,@Param("bedroom") int bedroom);
+           " select * from house where"+
+           " (address =:address and (price between :start and :end))"+"and (bathroom=:bathroom and bedroom=:bedroom)"+ "and status = 1"+ " UNION"+
+           " select h.id , address ,bathroom,bedroom,description,name,price ,status,category_id,owner_id"+ " from house h join orderr o on h.id = o.house_id"+
+    "where not(:cus_begin<=o.start_time and o.start_time<=:cus_end or :cus_begin<=o.end_time and o.end_time<=:cus_end)",nativeQuery = true)
+    Iterable<House>findByAllThing(@Param("address")String address, @Param("start") int start, @Param("end")int end, @Param("bathroom") int bathroom, @Param("bedroom") int bedroom, @Param("cus_begin") LocalDate cus_begin,@Param("cus_end") LocalDate cus_end);
 }

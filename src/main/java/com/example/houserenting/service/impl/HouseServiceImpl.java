@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -68,6 +70,11 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public Iterable<House> findByOwnerId(int owner_id) {
         return houseRepository.findByOwnerId(owner_id);
+    }
+
+    @Override
+    public Iterable<House> findByAll(String address, int start, int end, int bathroom, int bedroom, LocalDate cus_begin, LocalDate cus_end) {
+        return houseRepository.findByAllThing(address, start, end, bathroom, bedroom, cus_begin, cus_end);
     }
 
 
