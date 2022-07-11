@@ -140,3 +140,7 @@ function getImageById(id) {
         }
     })
 }
+
+function showSearchForm() {
+    
+}
