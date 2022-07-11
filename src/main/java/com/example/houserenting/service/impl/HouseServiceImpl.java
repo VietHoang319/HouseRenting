@@ -61,6 +61,11 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
+    public Iterable<House> findTop2() {
+        return houseRepository.findTop2();
+    }
+
+    @Override
     public Page<House> findAllByBathroomAndBedroom(int bathroom, int bedroom, Pageable pageable) {
         return houseRepository.findAllByBathroomAndBedroom(bathroom,bedroom,pageable);
     }

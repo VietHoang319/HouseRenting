@@ -64,6 +64,15 @@ public class HouseController {
         return new ResponseEntity<>(houses, HttpStatus.OK);
     }
 
+    @GetMapping("/by-price-top2")   // Sắp xếp giá từ thấp đến cao
+    public ResponseEntity<Iterable<House>> findTop2() {
+        List<House> houses = (List<House>) houseService.findTop2();
+        if (houses.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(houses, HttpStatus.OK);
+    }
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(

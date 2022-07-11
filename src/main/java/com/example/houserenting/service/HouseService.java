@@ -16,6 +16,8 @@ public interface HouseService extends IService<House>{
     Page<House>findAllByBathroom (int bathroom,Pageable pageable);
     Page<House> findByCategory (int category, Pageable pageable);
 
+    Iterable<House> findTop2();
+
 
 
 

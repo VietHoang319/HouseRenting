@@ -76,6 +76,15 @@ function showHome() {
                   
                   </div>
                 </div>
+                
+                <div class="list-group panel">
+                  <button onclick="findtop()">Top 2 nhà được thuê nhiều nhất</button>
+
+                </div>
+                
+                
+                
+                
               </div>
             </div>
             <div class="col-10">
@@ -103,6 +112,18 @@ function findAll() {
         }
     });
 }
+
+
+function findtop() {
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/houses/by-price-top2",
+        success: function (data) {
+            display(data);
+        }
+    });
+}
+
 
 function display(data, flag) {
     let tbody = document.getElementById("list")
