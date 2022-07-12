@@ -5,7 +5,7 @@ function showOrderHouseDetail(id, ownerId) {
                     <div id="infoFrame">
                         
                     </div>
-                    <div class="row mt-4 mb-4">
+                    <div class="row mt-4 mb-4 def">
                         <div class="col-12">`
     if (token === "") {
         str += `<button class="btn-nav btn-order" type="button" style="width: 100%" onclick="showLogin()">Thuê nhà</button>`
@@ -17,7 +17,7 @@ function showOrderHouseDetail(id, ownerId) {
     str += `        </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row abc">
                 <div class="col-12">
                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" id="carousel">
                         <ol class="carousel-indicators" id="carouselIndicators">
