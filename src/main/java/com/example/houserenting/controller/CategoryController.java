@@ -22,11 +22,8 @@ import java.util.Optional;
 public class  CategoryController {
     @Autowired
     CategoryService categoryService;
-
     @Autowired
     HouseServiceImpl houseService;
-
-
 
     @GetMapping
     public ResponseEntity<Iterable<Category>> findAllCate() {
@@ -38,7 +35,5 @@ public class  CategoryController {
         Page <House> houses = houseService.findAllByCategory_Id(id, pageable);
         return new ResponseEntity<>(houses, HttpStatus.OK);
     }
-
-
 }
 

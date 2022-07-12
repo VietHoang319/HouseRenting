@@ -24,7 +24,7 @@ public class HomeController {
     HouseServiceImpl houseService;
 
     @GetMapping
-    public ResponseEntity<Page<House>> findAllHouse(@PageableDefault(value = 20) Pageable pageable) {
+    public ResponseEntity<Page<House>> findAllHouse(@PageableDefault(value = 2) Pageable pageable) {
         Page<House> houses = houseService.findAll(pageable);
         return new ResponseEntity<>(houses, HttpStatus.OK);
     }
@@ -40,8 +40,6 @@ public class HomeController {
         Page<House> houses = houseService.findByCategory(category, pageable);
         return new ResponseEntity<>(houses, HttpStatus.OK);
     }
-
-
 
     @GetMapping("/find-by-bathroom")
     public ResponseEntity<Page<House>> findHouseByBathroom(@RequestParam(value = "bathroom") int bathroom, @PageableDefault(value = 9) Pageable pageable) {

@@ -16,7 +16,7 @@ function showLogin() {
         <input type="password" placeholder="Nhập mật khẩu" id="password">
         <button class="btn-login" onclick="login()">Đăng nhập</button>
         <button class="btn-login" onclick="showRegister()">Đăng ký</button>
-        <button class="btn-login"><i class="fa-brands fa-google"></i> Đăng nhập với Google</button>
+<!--        <button class="btn-login"><i class="fa-brands fa-google"></i> Đăng nhập với Google</button>-->
     </div>`
     content.html(str)
 }

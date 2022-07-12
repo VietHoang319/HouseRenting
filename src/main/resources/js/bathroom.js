@@ -19,6 +19,7 @@ function searchByBathRoom(bathroom) {
                     </div>`
             content1.html(str)
             display(data.content, true)
+            pageable(data)
         }
     })
 }

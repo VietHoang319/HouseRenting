@@ -30,21 +30,21 @@ function showHome() {
                         </li>
                     </ul>
                     <button class="btn-nav btn-search" onclick="showSearchForm()"><i class="fa-solid fa-magnifying-glass"></i></button>`
-        if(token === "") {
-            str += `<button class="btn-nav" onclick="showLogin()">Đăng nhập</button>
+    if (token === "") {
+        str += `<button class="btn-nav" onclick="showLogin()">Đăng nhập</button>
                     <button class="btn-nav" onclick="showRegister()">Đăng ký</button>`
-        } else {
-            str += `<div class="dropdown title-username">
+    } else {
+        str += `<div class="dropdown title-username">
                       <button class="dropdown-toggle btn-nav" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">${localStorage.getItem("name")}</button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <button class="dropdown-item" onclick="showMyHouse()">Nhà của bạn</button>
-                        <button class="dropdown-item">Nhà đã thuê</button>
+<!--                        <button class="dropdown-item">Nhà đã thuê</button>-->
                         <button class="dropdown-item" onclick="logout()">Đăng xuất</button>
                       </div>
                     </div>`
-        }
+    }
 
-                str += `</div>
+    str += `</div>
             </nav>
         </div>
     </div>
@@ -92,22 +92,26 @@ function showHome() {
                     
                     </div>
                 </div>
+                <div id="pageable">
+                
+                </div>
             </div>
         </div>
     </div>`
     content.html(str)
-    findAll()
+    findAll(0)
     findAllCategory()
     findAllBedroom()
     findAllBathroom()
 }
 
-function findAll() {
+function findAll(number) {
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/home",
+        url: "http://localhost:8080/home?page=" + number,
         success: function (data) {
             display(data.content, true);
+            pageable(data)
         }
     });
 }
@@ -124,6 +128,7 @@ function findtop() {
                     </div>`
             content1.html(str)
             display(data, true);
+            $("#pageable").empty()
         }
     });
 }
@@ -134,13 +139,12 @@ function display(data, flag) {
 
     for (let i = 0; i < data.length; i++) {
         str += `<div class="col-4 mt-4 content">`
-            if (flag == true) {
-                str += `<div class="card" style="width: 18rem;" onclick="showOrderHouseDetail(${data[i].id}, ${data[i].owner.id})">`
-            }
-            else {
-                str += `<div class="card" style="width: 18rem;" onclick="showHouseDetail(${data[i].id})">`
-            }
-            str += `<img class="image-card" id="imageCard${i}" class="card-img-top" style="width: 100%; height: 200px" alt="...">
+        if (flag == true) {
+            str += `<div class="card" style="width: 18rem;" onclick="showOrderHouseDetail(${data[i].id}, ${data[i].owner.id})">`
+        } else {
+            str += `<div class="card" style="width: 18rem;" onclick="showHouseDetail(${data[i].id})">`
+        }
+        str += `<img class="image-card" id="imageCard${i}" class="card-img-top" style="width: 100%; height: 200px" alt="...">
                       <div class="card-body">
                         <h3 class="card-title">${data[i].name}</h3>
                         <p><i class="fa-solid fa-location-dot"></i> ${data[i].address}</p>
@@ -214,13 +218,13 @@ function changValBathroom() {
 }
 
 function searchByAll() {
-    let address= document.getElementById("address").value;
-    let startPrice= document.getElementById("startPrice").value;
-    let endPrice= document.getElementById("endPrice").value;
-    let bathroom= document.getElementById("bathroom").value;
-    let bedroom= document.getElementById("bedroom").value;
-    let dateBegin= document.getElementById("dateBegin").value;
-    let dateEnd= document.getElementById("dateEnd").value;
+    let address = document.getElementById("address").value;
+    let startPrice = document.getElementById("startPrice").value;
+    let endPrice = document.getElementById("endPrice").value;
+    let bathroom = document.getElementById("bathroom").value;
+    let bedroom = document.getElementById("bedroom").value;
+    let dateBegin = document.getElementById("dateBegin").value;
+    let dateEnd = document.getElementById("dateEnd").value;
 
     console.log(bathroom)
     console.log(bedroom)
@@ -232,6 +236,23 @@ function searchByAll() {
             console.log(data)
             modal.modal("hide")
             display(data, true)
+            $("#pageable").empty()
         }
     })
+}
+
+function pageable(data) {
+    let pageable = $("#pageable")
+    let number1 = data.pageable.pageNumber;
+    let str = ``;
+    if (data.content.length !== 0) {
+        if (number1 - 1 >= 0) {
+            str += `<button onclick="findAll(${number1 - 1})">Trước</button> `;
+        }
+        str += data.pageable.pageNumber + 1 + "/" + data.totalPages
+        if (number1 + 1 < data.totalPages) {
+            str += `<button onclick="findAll(${number1 + 1})">Sau</button>`;
+        }
+        pageable.html(str)
+    }
 }

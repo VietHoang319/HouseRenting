@@ -24,6 +24,7 @@ function searchByCategoryId(category_id) {
                     </div>`
             content1.html(str)
             display(data.content, true);
+            pageable(data)
         }
     });
 }

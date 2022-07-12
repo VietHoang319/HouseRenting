@@ -43,6 +43,7 @@ function showOrderHouseDetail(id, ownerId) {
     content1.html(str)
     getHouseDetail(id)
     findImagesByHouse(id)
+    $("#pageable").empty()
 }
 
 function getHouseDetail(id) {
