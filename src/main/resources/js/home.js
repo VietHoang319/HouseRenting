@@ -78,7 +78,6 @@ function showHome() {
                   
                   </div>
                 </div>
-                
                 <div class="list-group panel">
                   <button onclick="findtop()">Top 5 nhà được thuê nhiều nhất</button>
 
@@ -92,6 +91,7 @@ function showHome() {
                     
                     </div>
                 </div>
+                <br>
                 <div id="pageable">
                 
                 </div>
@@ -244,15 +244,15 @@ function searchByAll() {
 function pageable(data) {
     let pageable = $("#pageable")
     let number1 = data.pageable.pageNumber;
-    let str = ``;
+    let str = `<button class="btn-nav" style="border: 1px solid #080710" onclick="findAll(${number1 - 1})" id="pageablePre">Trước</button> ${data.pageable.pageNumber + 1} / ${data.totalPages} 
+                <button class="btn-nav" style="border: 1px solid #080710" onclick="findAll(${number1 + 1})" id="pageableNext">Sau</button>`;
+    pageable.html(str)
     if (data.content.length !== 0) {
         if (number1 - 1 >= 0) {
-            str += `<button onclick="findAll(${number1 - 1})">Trước</button> `;
+            $("#pageableNext").hide()
         }
-        str += data.pageable.pageNumber + 1 + "/" + data.totalPages
         if (number1 + 1 < data.totalPages) {
-            str += `<button onclick="findAll(${number1 + 1})">Sau</button>`;
+            $("#pageablePre").hide()
         }
-        pageable.html(str)
     }
 }
