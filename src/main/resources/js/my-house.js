@@ -3,7 +3,7 @@ let role;
 
 function showMyHouse() {
     let content0 = $("#content0")
-    let str = `     <div class="row">
+    let str = `<div class="row"  style="justify-content: normal">
                     <button class="mt-4 btn-nav" style="border: 2px solid black" onclick="showAddForm()">Thêm nhà</button>
                 </div>
                 <div class="col-12">

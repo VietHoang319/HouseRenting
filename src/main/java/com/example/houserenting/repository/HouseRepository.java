@@ -41,7 +41,6 @@ public interface HouseRepository extends JpaRepository<House,Long> {
             "limit 5) as abc on abc.house_id = house.id;",nativeQuery = true)
     Iterable<House> findTop2();
 
-
     @Query (value = "select * from house where (bathroom = :bathroom and bedroom = :bedroom)",nativeQuery = true )
     Page<House> findAllByBathroomAndBedroom (@Param("bathroom") int bathroom,@Param("bedroom") int bedroom,Pageable pageable);
 

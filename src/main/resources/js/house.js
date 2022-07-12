@@ -3,7 +3,7 @@ function showHouseDetail(id) {
     let str = `<div class="row">
             <div class="col-12">
                 <div id="content1">
-                    <div class="row">
+                    <div class="row" style="justify-content: normal">
                         <button class="btn-nav" onclick="showMyHouse()"><i class="fa-solid fa-angles-left"></i><span> Quay lại</span></button>
                     </div>
                     <div class="row mt-4">

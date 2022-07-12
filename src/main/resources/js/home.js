@@ -121,7 +121,6 @@ function findtop() {
         type: "GET",
         url: "http://localhost:8080/houses/by-price-top2",
         success: function (data) {
-            console.log(data)
             let content1 = $("#content1")
             let str = `<div class="row" id="list">
 
@@ -138,9 +137,9 @@ function display(data, flag) {
     let str = "";
 
     for (let i = 0; i < data.length; i++) {
-        str += `<div class="col-4 mt-4 content">`
+        str += `<div class="col-xl-4 col-lg-6 mt-4 content">`
         if (flag == true) {
-            str += `<div class="card" style="width: 18rem;" onclick="showOrderHouseDetail(${data[i].id}, ${data[i].owner.id})">`
+            str += `<div class="card" style="width: 18rem;" onclick="showOrderHouseDetail(${data[i].id}, ${data[i].owner.id}, ${data[i].status})">`
         } else {
             str += `<div class="card" style="width: 18rem;" onclick="showHouseDetail(${data[i].id})">`
         }
@@ -244,15 +243,17 @@ function searchByAll() {
 function pageable(data) {
     let pageable = $("#pageable")
     let number1 = data.pageable.pageNumber;
-    let str = `<button class="btn-nav" style="border: 1px solid #080710" onclick="findAll(${number1 - 1})" id="pageablePre">Trước</button> ${data.pageable.pageNumber + 1} / ${data.totalPages} 
-                <button class="btn-nav" style="border: 1px solid #080710" onclick="findAll(${number1 + 1})" id="pageableNext">Sau</button>`;
-    pageable.html(str)
+    let str = ``;
     if (data.content.length !== 0) {
         if (number1 - 1 >= 0) {
             $("#pageableNext").hide()
+            str += `<button class="btn-nav" style="border: 1px solid black" onclick="findAll(${number1 - 1})">Trước</button> `;
         }
+        str += data.pageable.pageNumber + 1 + "/" + data.totalPages
         if (number1 + 1 < data.totalPages) {
             $("#pageablePre").hide()
+            str += `<button class="btn-nav" style="border: 1px solid black" onclick="findAll(${number1 + 1})">Sau</button>`;
         }
+        pageable.html(str)
     }
 }
