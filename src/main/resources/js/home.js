@@ -100,7 +100,6 @@ function showHome() {
     findAllCategory()
     findAllBedroom()
     findAllBathroom()
-    showCarouselTop()
 }
 
 function findAll() {
@@ -136,7 +135,7 @@ function display(data, flag) {
     for (let i = 0; i < data.length; i++) {
         str += `<div class="col-4 mt-4 content">`
             if (flag == true) {
-                str += `<div class="card" style="width: 18rem;" onclick="showOrderHouseDetail(${data[i].id})">`
+                str += `<div class="card" style="width: 18rem;" onclick="showOrderHouseDetail(${data[i].id}, ${data[i].owner.id})">`
             }
             else {
                 str += `<div class="card" style="width: 18rem;" onclick="showHouseDetail(${data[i].id})">`

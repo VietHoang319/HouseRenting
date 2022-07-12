@@ -1,4 +1,4 @@
-function showOrderHouseDetail(id) {
+function showOrderHouseDetail(id, ownerId) {
     let content1 = $("#content1")
     let str = `<div class="row mt-4">
                 <div class="col-11 info-frame" style="margin: 0 5% 3% 5%">
@@ -10,7 +10,9 @@ function showOrderHouseDetail(id) {
     if (token === "") {
         str += `<button class="btn-nav btn-order" type="button" style="width: 100%" onclick="showLogin()">Thuê nhà</button>`
     } else {
-        str += `<button class="btn-nav btn-order" type="button" style="width: 100%" onclick="showOrder(${id})">Thuê nhà</button>`
+        if (ownerId != localStorage.getItem("id")) {
+            str += `<button class="btn-nav btn-order" type="button" style="width: 100%" onclick="showOrder(${id})">Thuê nhà</button>`
+        }
     }
     str += `        </div>
                 </div>
